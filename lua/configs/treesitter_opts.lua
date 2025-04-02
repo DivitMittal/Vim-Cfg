@@ -15,7 +15,7 @@ return {
     'cpp',
     'commonlisp',
     'java',
-    'groovy',
+    --'groovy',
     'python',
 
     -- sysadmin

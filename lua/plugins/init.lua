@@ -49,7 +49,7 @@ return {
     },
   },
 
-  -- configure the neovim native LSP server
+  -- configure the neovim native LSP client
   {
     "neovim/nvim-lspconfig",
     enabled = true,
@@ -69,29 +69,26 @@ return {
     end,
   },
 
-  -- ----------------------------------------------------------- --
-  --                Default Disabled Plugins
-  -- ----------------------------------------------------------- --
-  {
-    -- LSPs, DAPs, Linters & Formatters Packages Management
-    "williamboman/mason.nvim",
-    enabled = false,
-    cond = not isVSCode,
-    -- automatic setup of lspconfig for Mason installed LSPs
-    dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-      enabled = false,
-      cond = not isVSCode,
-      config = function()
-        require("mason-lspconfig").setup()
-        require("mason-lspconfig").setup_handlers({
-          function(server_name)
-            require("lspconfig")[server_name].setup({})
-          end,
-        })
-      end,
-    },
-  },
+  -- {
+  --   -- LSPs, DAPs, Linters & Formatters Packages Management
+  --   "williamboman/mason.nvim",
+  --   enabled = false,
+  --   cond = not isVSCode,
+  --   -- automatic setup of lspconfig for Mason installed LSPs
+  --   dependencies = {
+  --     "williamboman/mason-lspconfig.nvim",
+  --     enabled = false,
+  --     cond = not isVSCode,
+  --     config = function()
+  --       require("mason-lspconfig").setup()
+  --       require("mason-lspconfig").setup_handlers({
+  --         function(server_name)
+  --           require("lspconfig")[server_name].setup({})
+  --         end,
+  --       })
+  --     end,
+  --   },
+  -- },
 
   -- ----------------------------------------------------------- --
   --                   Custom Plugins
@@ -222,19 +219,6 @@ return {
   },
 
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = true,
-    cond = not isVSCode,
-    dependencies = {
-      { "zbirenbaum/copilot.lua" },
-      { "nvim-lua/plenary.nvim" }, -- for curl, log and async functions
-    },
-    build = "make tiktoken",       -- Only on MacOS or Linux
-    event = "VeryLazy",
-    opts = {},
-  },
-
-  {
     "zbirenbaum/copilot.lua",
     enabled = true,
     cond = not isVSCode,
@@ -274,38 +258,51 @@ return {
     },
   },
 
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    dependencies = {
+      { "zbirenbaum/copilot.lua" },
+      { "nvim-lua/plenary.nvim" }, -- for curl, log and async functions
+    },
+    build = "make tiktoken",       -- Only on MacOS or Linux
+    event = "VeryLazy",
+    opts = {},
+  },
+
   -- ----------------------------------------------------------- --
   --                Custom Disabled Plugins
   -- ----------------------------------------------------------- --
   -- multicursors.nvim & hydra.nvim(custom keybinding creation)
-  {
-    "smoka7/multicursors.nvim",
-    dependencies = { "smoka7/hydra.nvim" },
-    enabled = false,
-    cond = not isVSCode,
-    event = "VeryLazy",
-    opts = {},
-    cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
-    keys = {
-      { mode = { "v", "n" }, "<leader>mc", "<cmd>MCstart<cr>", desc = "selected word under the cursor and listen for actions", },
-    },
-  },
+  -- {
+  --   "smoka7/multicursors.nvim",
+  --   dependencies = { "smoka7/hydra.nvim" },
+  --   enabled = false,
+  --   cond = not isVSCode,
+  --   event = "VeryLazy",
+  --   opts = {},
+  --   cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
+  --   keys = {
+  --     { mode = { "v", "n" }, "<leader>mc", "<cmd>MCstart<cr>", desc = "selected word under the cursor and listen for actions", },
+  --   },
+  -- },
 
   -- Linting
-  {
-    "mfussenegger/nvim-lint",
-    enabled = false,
-    cond = not isVSCode,
-    event = { "BufWritePost", "BufReadPost", "InsertLeave" },
-    opts = function(_, conf) return require("configs.lint_opts") end,
-    config = function(_, opts)
-      local lint = require('lint')
-      lint.linters_by_ft = opts
-      vim.api.nvim_create_autocmd({"BufWritePost", "BufReadPost", "InsertLeave"}, {
-        group = vim.api.nvim_create_augroup("lint", { clear = true }),
-        pattern = "*",
-        callback = function() lint.try_lint() end,
-      })
-    end,
-  },
+  -- {
+  --   "mfussenegger/nvim-lint",
+  --   enabled = false,
+  --   cond = not isVSCode,
+  --   event = { "BufWritePost", "BufReadPost", "InsertLeave" },
+  --   opts = function(_, conf) return require("configs.lint_opts") end,
+  --   config = function(_, opts)
+  --     local lint = require('lint')
+  --     lint.linters_by_ft = opts
+  --     vim.api.nvim_create_autocmd({"BufWritePost", "BufReadPost", "InsertLeave"}, {
+  --       group = vim.api.nvim_create_augroup("lint", { clear = true }),
+  --       pattern = "*",
+  --       callback = function() lint.try_lint() end,
+  --     })
+  --   end,
+  -- },
 }

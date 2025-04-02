@@ -1,3 +1,3 @@
-return {
-  python = { 'flake8' },
-}
+-- return {
+--   python = { 'flake8' },
+-- }
