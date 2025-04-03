@@ -1,5 +1,5 @@
-local lspconfig = require("lspconfig")
-local chadlsp = require("nvchad.configs.lspconfig")
+local lspconfig = require "lspconfig"
+local chadlsp = require "nvchad.configs.lspconfig"
 chadlsp.defaults()
 
 local servers = {
@@ -16,15 +16,15 @@ local servers = {
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup({
+  lspconfig[lsp].setup {
     on_attach = chadlsp.on_attach,
     on_init = chadlsp.on_init,
     capabilities = chadlsp.capabilities,
-  })
+  }
 end
 
 -- html
-lspconfig.emmet_language_server.setup({
+lspconfig.emmet_language_server.setup {
   on_attach = chadlsp.on_attach,
   on_init = chadlsp.on_init,
   capabilities = chadlsp.capabilities,
@@ -40,50 +40,44 @@ lspconfig.emmet_language_server.setup({
     "scss",
     "pug",
     "typescriptreact",
-    "vue"
+    "vue",
   },
-})
+}
 
 -- typescript
-lspconfig.ts_ls.setup({
+lspconfig.ts_ls.setup {
   on_attach = chadlsp.on_attach,
   on_init = chadlsp.on_init,
   capabilities = chadlsp.capabilities,
   init_options = {
     plugins = {
       {
-        name = '@vue/typescript-plugin',
+        name = "@vue/typescript-plugin",
         -- it's a hack for nixOS /nix/store/
         location = vim.fs.joinpath(
-          vim.fs.dirname(
-            vim.fs.dirname(
-              vim.fn.system(
-                'echo -n $(readlink -f $(which vue-language-server))'
-              )
-            )
-          ),
-          'lib/node_modules/@vue/language-server'
+          vim.fs.dirname(vim.fs.dirname(vim.fn.system "echo -n $(readlink -f $(which vue-language-server))")),
+          "lib/node_modules/@vue/language-server"
         ),
         --
-        languages = { 'vue' },
+        languages = { "vue" },
       },
     },
   },
   filetypes = {
-    'typescript',
-    'javascript',
-    'javascriptreact',
-    'typescriptreact',
-    'vue'
+    "typescript",
+    "javascript",
+    "javascriptreact",
+    "typescriptreact",
+    "vue",
   },
-})
+}
 
 --python
-lspconfig.pylsp.setup({
+lspconfig.pylsp.setup {
   on_attach = chadlsp.on_attach,
   on_init = chadlsp.on_init,
   capabilities = chadlsp.capabilities,
-  configurationSources = { 'flake8' },
+  configurationSources = { "flake8" },
   settings = {
     plugins = {
       flake8 = {
@@ -95,5 +89,5 @@ lspconfig.pylsp.setup({
       pylint = { enabled = false },
       mccabe = { enabled = false },
     },
-  }
-})
+  },
+}

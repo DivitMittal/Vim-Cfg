@@ -1,44 +1,44 @@
 return {
   ensure_installed = {
     -- nvim
-    'vim',
-    'vimdoc',
-    'lua',
+    "vim",
+    "vimdoc",
+    "lua",
 
     -- web-dev
-    'html',
-    'css',
-    'javascript',
+    "html",
+    "css",
+    "javascript",
 
     -- languages
-    'c',
-    'cpp',
-    'commonlisp',
-    'java',
+    "c",
+    "cpp",
+    "commonlisp",
+    "java",
     --'groovy',
-    'python',
+    "python",
 
     -- sysadmin
-    'bash',
-    'nix',
-    'powershell',
+    "bash",
+    "nix",
+    "powershell",
 
     -- git
-    'diff',
-    'gitignore',
-    'gitcommit',
+    "diff",
+    "gitignore",
+    "gitcommit",
 
     -- data
-    'markdown',
-    'markdown_inline',
-    'csv',
-    'kdl',
-    'json',
-    'jsonc',
-    'xml',
-    'ini',
-    'toml',
-    'yaml',
+    "markdown",
+    "markdown_inline",
+    "csv",
+    "kdl",
+    "json",
+    "jsonc",
+    "xml",
+    "ini",
+    "toml",
+    "yaml",
   },
 
   sync_install = false, -- synchronous install of ensure_installed

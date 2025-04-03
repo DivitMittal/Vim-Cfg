@@ -42,10 +42,21 @@ return {
     enabled = true,
     cond = not isVSCode,
     cmd = { "ConformInfo" },
-    opts = function(_, _) return require("configs.conform_opts") end,
-    init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
+    opts = function(_, _)
+      return require "configs.conform_opts"
+    end,
+    init = function()
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    end,
     keys = {
-      { mode = { "n", "v" }, "<leader>fm", function() require("conform").format({ async = true }) end, desc = "Format buffer", },
+      {
+        mode = { "n", "v" },
+        "<leader>fm",
+        function()
+          require("conform").format { async = true }
+        end,
+        desc = "Format buffer",
+      },
     },
   },
 
@@ -54,7 +65,9 @@ return {
     "neovim/nvim-lspconfig",
     enabled = true,
     cond = not isVSCode,
-    config = function() require("configs.lsp_config") end
+    config = function()
+      require "configs.lsp_config"
+    end,
   },
 
   -- treesitter syntax highlighting
@@ -62,7 +75,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     enabled = true,
     cond = not isVSCode,
-    opts = require("configs.treesitter_opts"),
+    opts = require "configs.treesitter_opts",
     config = function(_, opts)
       require("nvim-treesitter.install").compilers = { "clang" }
       require("nvim-treesitter.configs").setup(opts)
@@ -107,7 +120,7 @@ return {
       auto_cmd = true,
       override_editorconfig = false, -- Set to true to override settings set by .editorconfig
 
-      filetype_exclude = {           -- A list of filetypes for which the auto command gets disabled
+      filetype_exclude = { -- A list of filetypes for which the auto command gets disabled
         "tutor",
       },
       "netrw",
@@ -120,14 +133,13 @@ return {
       on_tab_options = { -- A table of vim options when tabs are detected
         ["expandtab"] = false,
       },
-      on_space_options = {        -- A table of vim options when spaces are detected
+      on_space_options = { -- A table of vim options when spaces are detected
         ["expandtab"] = true,
         ["tabstop"] = "detected", -- If the option value is 'detected', The value is set to the automatically detected indent size.
         ["softtabstop"] = "detected",
         ["shiftwidth"] = "detected",
       },
     },
-
   },
 
   -- Collection of nvim plugins
@@ -137,11 +149,11 @@ return {
     event = "BufEnter",
     config = function()
       -- require('mini.jump2d').setup({ labels = 'oienarstwqyxcpl' }) -- EasyMotion/Hop like plugin ( using flash.nvim instead )
-      require("mini.align").setup({})    -- vim-easy-align like plugin
-      require("mini.surround").setup({}) -- vim-surround lke plugin
+      require("mini.align").setup {} -- vim-easy-align like plugin
+      require("mini.surround").setup {} -- vim-surround lke plugin
 
       -- vim-move like plugin
-      require("mini.move").setup({
+      require("mini.move").setup {
         mappings = {
           -- Move visual selection in Visual mode.
           left = "<S-Left>",
@@ -155,7 +167,7 @@ return {
           line_up = "<S-Up>",
         },
         options = { reindent_linewise = true },
-      })
+      }
     end,
   },
 
@@ -191,8 +203,22 @@ return {
       },
     },
     keys = {
-      { mode = { "n", "x", "o" }, "<cr>", function() require("flash").jump() end,       desc = "flash", },
-      { mode = { "n", "x", "o" }, "s",    function() require("flash").treesitter() end, desc = "flash  treesitter", },
+      {
+        mode = { "n", "x", "o" },
+        "<cr>",
+        function()
+          require("flash").jump()
+        end,
+        desc = "flash",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "s",
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "flash  treesitter",
+      },
       -- { mode = { "o", "x" }, "r"   , function() require("flash").treesitter_search() end, desc = "treesitter search" },
       -- { mode = { "c" }, "<c-s>", function() require("flash").toggle() end, desc = "toggle flash search" },
       -- { mode = "o"    , "r"    , function() require("flash").remote() end, desc = "Remote Flash" },
@@ -207,14 +233,70 @@ return {
     event = "BufEnter",
     opts = {},
     keys = {
-      { mode = { "n" }, "<C-Left>",  function() require("smart-splits").move_cursor_left() end,  desc = "move   cursor left  across splits", },
-      { mode = { "n" }, "<C-Right>", function() require("smart-splits").move_cursor_right() end, desc = "move   cursor right across splits", },
-      { mode = { "n" }, "<C-Down>",  function() require("smart-splits").move_cursor_down() end,  desc = "move   cursor down  across splits", },
-      { mode = { "n" }, "<C-Up>",    function() require("smart-splits").move_cursor_up() end,    desc = "move   cursor up    across splits", },
-      { mode = { "n" }, "<A-Up>",    function() require("smart-splits").resize_up() end,         desc = "resize pane   up    across splits", },
-      { mode = { "n" }, "<A-Down>",  function() require("smart-splits").resize_down() end,       desc = "resize pane   down  across splits", },
-      { mode = { "n" }, "<A-Right>", function() require("smart-splits").resize_right() end,      desc = "resize pane   right across splits", },
-      { mode = { "n" }, "<A-Left>",  function() require("smart-splits").resize_left() end,       desc = "resize pane   left  across splits", },
+      {
+        mode = { "n" },
+        "<C-Left>",
+        function()
+          require("smart-splits").move_cursor_left()
+        end,
+        desc = "move   cursor left  across splits",
+      },
+      {
+        mode = { "n" },
+        "<C-Right>",
+        function()
+          require("smart-splits").move_cursor_right()
+        end,
+        desc = "move   cursor right across splits",
+      },
+      {
+        mode = { "n" },
+        "<C-Down>",
+        function()
+          require("smart-splits").move_cursor_down()
+        end,
+        desc = "move   cursor down  across splits",
+      },
+      {
+        mode = { "n" },
+        "<C-Up>",
+        function()
+          require("smart-splits").move_cursor_up()
+        end,
+        desc = "move   cursor up    across splits",
+      },
+      {
+        mode = { "n" },
+        "<A-Up>",
+        function()
+          require("smart-splits").resize_up()
+        end,
+        desc = "resize pane   up    across splits",
+      },
+      {
+        mode = { "n" },
+        "<A-Down>",
+        function()
+          require("smart-splits").resize_down()
+        end,
+        desc = "resize pane   down  across splits",
+      },
+      {
+        mode = { "n" },
+        "<A-Right>",
+        function()
+          require("smart-splits").resize_right()
+        end,
+        desc = "resize pane   right across splits",
+      },
+      {
+        mode = { "n" },
+        "<A-Left>",
+        function()
+          require("smart-splits").resize_left()
+        end,
+        desc = "resize pane   left  across splits",
+      },
     },
   },
 
@@ -254,7 +336,14 @@ return {
       },
     },
     keys = {
-      { mode = { "n", "v" }, "<leader>cp", function() require("copilot.panel").toggle() end, desc = "toggle copilot panel" },
+      {
+        mode = { "n", "v" },
+        "<leader>cp",
+        function()
+          require("copilot.panel").toggle()
+        end,
+        desc = "toggle copilot panel",
+      },
     },
   },
 
@@ -266,7 +355,7 @@ return {
       { "zbirenbaum/copilot.lua" },
       { "nvim-lua/plenary.nvim" }, -- for curl, log and async functions
     },
-    build = "make tiktoken",       -- Only on MacOS or Linux
+    build = "make tiktoken", -- Only on MacOS or Linux
     event = "VeryLazy",
     opts = {},
   },

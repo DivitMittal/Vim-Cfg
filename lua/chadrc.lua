@@ -3,7 +3,7 @@
 
 return {
   base46 = {
-    theme = 'gatekeeper',
+    theme = "gatekeeper",
     transparency = true,
     integrations = {
       "git",
@@ -12,14 +12,14 @@ return {
     },
     -- highlights
     hl_override = {
-      Comment = { italic = true, },
+      Comment = { italic = true },
     },
     hl_add = {
-      NvimTreeOpenedFolderName = { fg = 'green', bold = true },
+      NvimTreeOpenedFolderName = { fg = "green", bold = true },
     },
   },
 
-  ui ={
+  ui = {
     cmp = {
       icons = true,
       lspkind_text = true,
@@ -28,19 +28,19 @@ return {
       load_on_startup = false,
     },
     statusline = {
-      separator_style = 'round',
+      separator_style = "round",
     },
   },
 
   cheatsheet = {
-    theme = 'grid',
+    theme = "grid",
   },
 
   term = {
     winopts = {
       number = true,
       relativenumber = true,
-    }
+    },
   },
 
   lsp = {
