@@ -171,8 +171,8 @@ return {
     end,
   },
 
+  -- vim-vinegar like plugin for filesystem manipulation
   {
-    -- vim-vinegar like plugin for filesystem manipulation
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     enabled = true,
@@ -185,8 +185,8 @@ return {
     },
   },
 
+   -- vim-seek/vim-sneak/lightspeed.nvim/mini-jump.nvim/leap.nvim like plugin for multi-charater searching & jumping
   {
-    -- vim-seek/vim-sneak/lightspeed.nvim/mini-jump.nvim/leap.nvim like plugin for multi-charater searching & jumping
     "folke/flash.nvim",
     enabled = true,
     cond = not isVSCode,
@@ -222,6 +222,47 @@ return {
       -- { mode = { "o", "x" }, "r"   , function() require("flash").treesitter_search() end, desc = "treesitter search" },
       -- { mode = { "c" }, "<c-s>", function() require("flash").toggle() end, desc = "toggle flash search" },
       -- { mode = "o"    , "r"    , function() require("flash").remote() end, desc = "Remote Flash" },
+    },
+  },
+
+  -- diagnostics
+  {
+    "folke/trouble.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    opts = {},
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
     },
   },
 
