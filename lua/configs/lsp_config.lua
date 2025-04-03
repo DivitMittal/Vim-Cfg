@@ -3,13 +3,15 @@ local chadlsp = require("nvchad.configs.lspconfig")
 chadlsp.defaults()
 
 local servers = {
-  "bashls",
-  "cssls",
-  "docker_compose_language_service",  -- :set filetype=yaml.docker-compose
-  "dockerls",
-  "jsonls",
+  -- vscode-langservers-extracted
   "html",
+  "cssls",
+  "jsonls",
+  "eslint",
+
+  "bashls",
   "nixd",
+  "clangd",
 }
 
 -- lsps with default config

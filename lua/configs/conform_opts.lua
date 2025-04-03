@@ -6,22 +6,23 @@ return {
     c = { 'clang-format' },
     cpp = { 'clang-format' },
 
-    -- web-dev
+    -- prettier
     html = { 'prettier' },
     css = { 'prettier' },
     javascript = { 'prettier' },
+    markdown = { 'prettier' },
+    yaml = { 'prettier' },
+    json = { 'prettier' },
+    typescript = { 'prettier' },
 
     python = { 'black' },
-
-    nix = { 'nixpkgs-fmt' },
+    nix = { 'alejandra' },
+    kdl = { 'kdlfmt' },
 
     -- shell
-    sh =  { 'beautysh' },
-    bash =  { 'beautysh' },
-    zsh =  { 'beautysh' },
-
-    -- data
-    xml = { 'xmlformatter' },
-    json = { 'prettier' },
+    sh =  { 'shfmt' },
+    bash =  { 'shfmt' },
+    zsh =  { 'shfmt' },
+    fish = { 'fish_indent' },
   },
 }
