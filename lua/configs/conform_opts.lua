@@ -24,5 +24,10 @@ return {
     bash = { "shfmt" },
     zsh = { "shfmt" },
     fish = { "fish_indent" },
+
+    -- haskell
+    haskell = { "stylish-haskell" },
+    lhaskell = { "stylish-haskell" },
+    cabal = { "cabal_fmt" },
   },
 }

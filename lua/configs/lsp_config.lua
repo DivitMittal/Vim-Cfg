@@ -91,3 +91,11 @@ lspconfig.pylsp.setup {
     },
   },
 }
+
+-- haskell
+lspconfig.hls.setup {
+  on_attach = chadlsp.on_attach,
+  on_init = chadlsp.on_init,
+  capabilities = chadlsp.capabilities,
+  filetypes = { "haskell", "lhaskell", "cabal" },
+}
