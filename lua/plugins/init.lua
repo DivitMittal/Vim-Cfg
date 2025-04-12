@@ -185,7 +185,7 @@ return {
     },
   },
 
-   -- vim-seek/vim-sneak/lightspeed.nvim/mini-jump.nvim/leap.nvim like plugin for multi-charater searching & jumping
+  -- vim-seek/vim-sneak/lightspeed.nvim/mini-jump.nvim/leap.nvim like plugin for multi-charater searching & jumping
   {
     "folke/flash.nvim",
     enabled = true,

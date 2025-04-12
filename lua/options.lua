@@ -71,4 +71,3 @@ set.shell = "fish" -- shell to use for `!`, `:!`, `system()` etc.
 
 set.splitbelow = true -- open horizontal splits below current window
 set.splitright = true -- open vertical splits to the right of the current window
-
