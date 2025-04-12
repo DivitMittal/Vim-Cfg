@@ -1,6 +1,11 @@
 -- This file needs to have same structure as nvconfig.lua
 -- https://github.com/NvChad/ui/blob/v2.5/lua/nvconfig.lua
 
+---@return boolean
+function IsWindows()
+  return vim.uv.os_uname().version:match "Windows"
+end
+
 return {
   base46 = {
     theme = "gatekeeper",
@@ -47,8 +52,8 @@ return {
     signature = true,
   },
 
-  -- mason = {
-  --   cmd = true,
-  --   pkgs = require 'configs.mason_pkgs',
-  -- },
+  mason = {
+    cmd = IsWindows(),
+    pkgs = require "configs.mason_pkgs",
+  },
 }
