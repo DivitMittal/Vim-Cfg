@@ -26,8 +26,8 @@ return {
     fish = { "fish_indent" },
 
     -- haskell
-    haskell = { "stylish-haskell" },
-    lhaskell = { "stylish-haskell" },
+    haskell = { "ormolu" },
+    lhaskell = { "ormolu" },
     cabal = { "cabal_fmt" },
   },
 }
