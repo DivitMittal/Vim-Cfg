@@ -18,8 +18,33 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = import inputs.systems;
       imports = [
-        ./formatters.nix
-        ./devShells.nix
+        inputs.treefmt-nix.flakeModule
+        inputs.devshell.flakeModule
       ];
+      perSystem = {pkgs, ...}: {
+        treefmt = {
+          flakeCheck = false;
+
+          programs = {
+            #typos.enable = true;
+            ## Nix
+            alejandra.enable = true;
+            deadnix.enable = true;
+            statix.enable = true;
+            ## Lua
+            stylua.enable = true;
+          };
+
+          projectRootFile = "flake.nix";
+        };
+
+        devshells.default = {
+          packages = builtins.attrValues {
+            inherit(pkgs)
+              stylua
+            ;
+          };
+        };
+      };
     };
 }
