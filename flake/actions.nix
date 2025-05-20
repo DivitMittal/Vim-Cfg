@@ -13,14 +13,14 @@
     workflows = let
       on = {
         push = {
-          branches = ["master"];
+          branches = ["main"];
           paths-ignore = [
             "**/*.md"
             ".github/**"
           ];
         };
         pull_request = {
-          branches = ["master"];
+          branches = ["main"];
         };
         workflow_dispatch = {};
       };

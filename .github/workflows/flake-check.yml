@@ -13,10 +13,10 @@ jobs:
 'on':
   pull_request:
     branches:
-    - master
+    - main
   push:
     branches:
-    - master
+    - main
     paths-ignore:
     - '**/*.md'
     - .github/**
