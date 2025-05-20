@@ -342,6 +342,18 @@ return {
   },
 
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
+    opts = {
+      file_types = { "markdown", "Avante" },
+    },
+    ft = { "markdown", "Avante" },
+  },
+
+  -- ----------------------------------------------------------- --
+  --                AI Plugins
+  -- ----------------------------------------------------------- --
+  {
     "zbirenbaum/copilot.lua",
     enabled = true,
     cond = not isVSCode,
