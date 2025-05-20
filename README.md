@@ -14,4 +14,10 @@
 
 ---
 
+<div align='center'>
+    <img src="https://github.com/DivitMittal/Nvim-Cfg/actions/workflows/.github/workflows/flake-check.yml/badge.svg" alt="nix-flake-check"/>
+</div>
+
+---
+
 A pure lua [neovim](https://github.com/neovim/neovim) configuration over [NvChad](https://nvchad.com/) for [OS-nixCfg](https://github.com/DivitMittal/OS-nixCfg) via [nix home-manager module, i.e., nix4nvchad](https://github.com/nix-community/nix4nvchad)
