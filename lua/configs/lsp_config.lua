@@ -8,6 +8,7 @@ local servers = {
   "cssls",
   "jsonls",
   "eslint",
+  "svelte",
 
   "bashls",
   "nixd",
