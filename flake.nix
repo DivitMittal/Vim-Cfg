@@ -1,11 +1,13 @@
 {
   description = "Nvim-Cfg flake";
 
-  outputs = {flake-parts, ...} @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs = {flake-parts, ...} @ inputs: let
+    specialArgs.customLib = inputs.OS-nixCfg.lib;
+  in
+    flake-parts.lib.mkFlake {inherit inputs specialArgs;} ({inputs, ...}: {
       systems = builtins.import inputs.systems;
       imports = [./flake];
-    };
+    });
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -29,6 +31,18 @@
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
         pre-commit-hooks.follows = "pre-commit-hooks";
+      };
+    };
+    OS-nixCfg = {
+      url = "github:DivitMittal/OS-nixCfg";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        systems.follows = "systems";
+        pre-commit-hooks.follows = "pre-commit-hooks";
+        devshell.follows = "devshell";
+        treefmt-nix.follows = "treefmt-nix";
+        actions-nix.follows = "actions-nix";
       };
     };
   };
