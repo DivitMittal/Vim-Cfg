@@ -1,10 +1,11 @@
 {
   description = "Nvim-Cfg flake";
 
-  outputs = {flake-parts, ...} @ inputs: let
+  outputs = inputs: let
+    inherit (inputs.flake-parts.lib) mkFlake;
     specialArgs.customLib = inputs.OS-nixCfg.lib;
   in
-    flake-parts.lib.mkFlake {inherit inputs specialArgs;} ({inputs, ...}: {
+    mkFlake {inherit inputs specialArgs;} ({inputs, ...}: {
       systems = builtins.import inputs.systems;
       imports = [./flake];
     });
