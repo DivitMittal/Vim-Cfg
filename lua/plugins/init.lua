@@ -191,7 +191,7 @@ return {
     keys = {
       {
         mode = { "n", "x", "o" },
-        "<cr>",
+        "<leader><cr>",
         function()
           require("flash").jump()
         end,
@@ -199,7 +199,7 @@ return {
       },
       {
         mode = { "n", "x", "o" },
-        "s",
+        "<leader>s",
         function()
           require("flash").treesitter()
         end,
@@ -434,6 +434,18 @@ return {
           path = "~/Vaults/LO",
         },
       },
+    },
+  },
+
+  {
+    "hedyhli/outline.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    lazy = true,
+    cmd = { "Outline", "OutlineOpen" },
+    opts = {},
+    keys = {
+      { mode = { "n" }, "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
     },
   },
 
