@@ -423,25 +423,7 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
     ft = { "markdown", "Avante" },
     opts = {
-      file_types = { "markdown", "Avante" },
-    },
-  },
-
-  {
-    "epwalsh/obsidian.nvim",
-    enabled = true,
-    cond = not isVSCode,
-    version = "*",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    lazy = true,
-    ft = { "markdown" },
-    opts = {
-      workspaces = {
-        {
-          name = "LO",
-          path = "~/Vaults/LO",
-        },
-      },
+      file_types = { "markdown", "Avante", "vimwiki" },
     },
   },
 
@@ -457,12 +439,27 @@ return {
     },
   },
 
+  {
+    "bullets-vim/bullets.vim",
+    enabled = true,
+    cond = not isVSCode,
+    event = "BufEnter",
+    lazy = true,
+    init = function()
+      vim.g.bullets_enabled_filetypes = { "markdown", "text", "gitcommit" }
+      vim.g.bullets_enable_in_empty_buffers = 1
+    end,
+  },
+
+  -- ----------------------------------------------------------- --
+  --                Custom Disabled Plugins
+  -- ----------------------------------------------------------- --
   -- ----------------------------------------------------------- --
   --                AI Plugins
   -- ----------------------------------------------------------- --
   {
     "zbirenbaum/copilot.lua",
-    enabled = true,
+    enabled = false,
     cond = not isVSCode,
     cmd = "Copilot",
     event = "InsertEnter",
@@ -509,7 +506,7 @@ return {
 
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = true,
+    enabled = false,
     cond = not isVSCode,
     build = "make tiktoken", -- Only on MacOS or Linux
     dependencies = {
@@ -520,38 +517,44 @@ return {
     opts = {},
   },
 
-  -- ----------------------------------------------------------- --
-  --                Custom Disabled Plugins
-  -- ----------------------------------------------------------- --
   -- multicursors.nvim & hydra.nvim(custom keybinding creation)
-  -- {
-  --   "smoka7/multicursors.nvim",
-  --   dependencies = { "smoka7/hydra.nvim" },
-  --   enabled = false,
-  --   cond = not isVSCode,
-  --   event = "VeryLazy",
-  --   opts = {},
-  --   cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
-  --   keys = {
-  --     { mode = { "v", "n" }, "<leader>mc", "<cmd>MCstart<cr>", desc = "selected word under the cursor and listen for actions", },
-  --   },
-  -- },
+  {
+    "smoka7/multicursors.nvim",
+    dependencies = { "smoka7/hydra.nvim" },
+    enabled = false,
+    cond = not isVSCode,
+    event = "VeryLazy",
+    opts = {},
+    cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
+    keys = {
+      {
+        mode = { "v", "n" },
+        "<leader>mc",
+        "<cmd>MCstart<cr>",
+        desc = "selected word under the cursor and listen for actions",
+      },
+    },
+  },
 
   -- Linting
-  -- {
-  --   "mfussenegger/nvim-lint",
-  --   enabled = false,
-  --   cond = not isVSCode,
-  --   event = { "BufWritePost", "BufReadPost", "InsertLeave" },
-  --   opts = function(_, conf) return require("configs.lint_opts") end,
-  --   config = function(_, opts)
-  --     local lint = require('lint')
-  --     lint.linters_by_ft = opts
-  --     vim.api.nvim_create_autocmd({"BufWritePost", "BufReadPost", "InsertLeave"}, {
-  --       group = vim.api.nvim_create_augroup("lint", { clear = true }),
-  --       pattern = "*",
-  --       callback = function() lint.try_lint() end,
-  --     })
-  --   end,
-  -- },
+  {
+    "mfussenegger/nvim-lint",
+    enabled = false,
+    cond = not isVSCode,
+    event = { "BufWritePost", "BufReadPost", "InsertLeave" },
+    opts = function(_, _)
+      return require "configs.lint_opts"
+    end,
+    config = function(_, opts)
+      local lint = require "lint"
+      lint.linters_by_ft = opts
+      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+        group = vim.api.nvim_create_augroup("lint", { clear = true }),
+        pattern = "*",
+        callback = function()
+          lint.try_lint()
+        end,
+      })
+    end,
+  },
 }
