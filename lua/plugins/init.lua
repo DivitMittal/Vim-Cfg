@@ -420,20 +420,14 @@ return {
   },
 
   {
-    "epwalsh/obsidian.nvim",
+    "hedyhli/outline.nvim",
     enabled = true,
     cond = not isVSCode,
-    version = "*",
-    dependencies = { "nvim-lua/plenary.nvim" },
     lazy = true,
-    ft = { "markdown" },
-    opts = {
-      workspaces = {
-        {
-          name = "LO",
-          path = "~/Vaults/LO",
-        },
-      },
+    cmd = { "Outline", "OutlineOpen" },
+    opts = {},
+    keys = {
+      { mode = { "n" }, "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
     },
   },
 
