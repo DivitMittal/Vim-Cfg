@@ -103,6 +103,14 @@ return {
   --   },
   -- },
 
+  -- completion engine
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function()
+      require "configs.cmp_config"
+    end,
+  },
+
   -- ----------------------------------------------------------- --
   --                   Custom Plugins
   -- ----------------------------------------------------------- --
