@@ -82,8 +82,8 @@ return {
     end,
   },
 
+  -- LSPs, DAPs, Linters & Formatters Packages Management
   -- {
-  --   -- LSPs, DAPs, Linters & Formatters Packages Management
   --   "williamboman/mason.nvim",
   --   enabled = false,
   --   cond = not isVSCode,
@@ -118,22 +118,22 @@ return {
     event = "InsertEnter",
     opts = {
       auto_cmd = true,
-      override_editorconfig = false, -- Set to true to override settings set by .editorconfig
+      override_editorconfig = false,
 
-      filetype_exclude = { -- A list of filetypes for which the auto command gets disabled
+      filetype_exclude = {
         "tutor",
+        "netrw",
       },
-      "netrw",
-      buftype_exclude = { -- A list of buffer types for which the auto command gets disabled
+      buftype_exclude = {
         "help",
         "nofile",
         "terminal",
         "prompt",
       },
-      on_tab_options = { -- A table of vim options when tabs are detected
+      on_tab_options = {
         ["expandtab"] = false,
       },
-      on_space_options = { -- A table of vim options when spaces are detected
+      on_space_options = {
         ["expandtab"] = true,
         ["tabstop"] = "detected", -- If the option value is 'detected', The value is set to the automatically detected indent size.
         ["softtabstop"] = "detected",
@@ -169,20 +169,6 @@ return {
         options = { reindent_linewise = true },
       }
     end,
-  },
-
-  -- vim-vinegar like plugin for filesystem manipulation
-  {
-    "stevearc/oil.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    enabled = true,
-    cond = not isVSCode,
-    event = "VeryLazy",
-    cmd = "Oil",
-    opts = {},
-    keys = {
-      { mode = { "n" }, "-", "<cmd>Oil<CR>", desc = "Open parent directory" },
-    },
   },
 
   -- vim-seek/vim-sneak/lightspeed.nvim/mini-jump.nvim/leap.nvim like plugin for multi-charater searching & jumping
@@ -341,13 +327,114 @@ return {
     },
   },
 
+  -- bundle of QoL plugins
+  {
+    "folke/snacks.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    lazy = false,
+    priority = 1000,
+    opts = {
+      lazygit = { enabled = true },
+      terminal = { enabled = true },
+    },
+    keys = {
+      {
+        mode = { "n" },
+        "<leader>lg",
+        function()
+          require("snacks").lazygit()
+        end,
+        desc = "Lazygit floating window",
+      },
+      {
+        mode = { "n" },
+        "<leader>tt",
+        function()
+          require("snacks").terminal.open { "fish" }
+        end,
+        desc = "Terminal floating window",
+      },
+    },
+  },
+
+  -- vim-vinegar like plugin for filesystem manipulation
+  -- {
+  --   "stevearc/oil.nvim",
+  --   enabled = true,
+  --   cond = not isVSCode,
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   event = "VeryLazy",
+  --   cmd = "Oil",
+  --   opts = {},
+  --   keys = {
+  --     { mode = { "n" }, "-", "<cmd>Oil<CR>", desc = "Open parent directory" },
+  --   },
+  -- },
+  -- yazi.nvim
+  {
+    "mikavilpas/yazi.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    event = "VeryLazy",
+    dependencies = { "folke/snacks.nvim" },
+    keys = {
+      {
+        "<leader>-",
+        mode = { "n", "v" },
+        "<cmd>Yazi<cr>",
+        desc = "Open yazi at the current file",
+      },
+      {
+        "<leader>cw",
+        mode = { "n", "v" },
+        "<cmd>Yazi cwd<cr>",
+        desc = "Open the file manager in nvim's working directory",
+      },
+    },
+    opts = {
+      open_for_directories = true,
+      keymaps = {
+        show_help = "<f1>",
+      },
+    },
+    init = function()
+      -- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
+      -- vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+    end,
+  },
+
+  -- ----------------------------------------------------------- --
+  --                Notes Plugins
+  -- ----------------------------------------------------------- --
   {
     "MeanderingProgrammer/render-markdown.nvim",
+    enabled = true,
+    cond = not isVSCode,
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
+    ft = { "markdown", "Avante" },
     opts = {
       file_types = { "markdown", "Avante" },
     },
-    ft = { "markdown", "Avante" },
+  },
+
+  {
+    "epwalsh/obsidian.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    version = "*",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    lazy = true,
+    ft = { "markdown" },
+    opts = {
+      workspaces = {
+        {
+          name = "LO",
+          path = "~/Vaults/LO",
+        },
+      },
+    },
   },
 
   -- ----------------------------------------------------------- --
@@ -404,11 +491,11 @@ return {
     "CopilotC-Nvim/CopilotChat.nvim",
     enabled = true,
     cond = not isVSCode,
+    build = "make tiktoken", -- Only on MacOS or Linux
     dependencies = {
       { "zbirenbaum/copilot.lua" },
       { "nvim-lua/plenary.nvim" }, -- for curl, log and async functions
     },
-    build = "make tiktoken", -- Only on MacOS or Linux
     event = "VeryLazy",
     opts = {},
   },
