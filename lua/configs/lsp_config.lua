@@ -13,6 +13,7 @@ local servers = {
   "bashls",
   "nixd",
   "clangd",
+  "marksman",
 }
 
 -- lsps with default config
