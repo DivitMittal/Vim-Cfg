@@ -100,3 +100,17 @@ lspconfig.hls.setup {
   capabilities = chadlsp.capabilities,
   filetypes = { "haskell", "lhaskell", "cabal" },
 }
+
+-- markdown-oxide
+lspconfig.markdown_oxide.setup {
+  on_attach = chadlsp.on_attach,
+  on_init = chadlsp.on_init,
+  capabilities = vim.tbl_deep_extend("force", chadlsp.capabilities, {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
+      },
+    },
+  }),
+  filetypes = { "markdown", "vimwiki" },
+}
