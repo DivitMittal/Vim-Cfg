@@ -449,14 +449,11 @@ return {
   },
 
   -- ----------------------------------------------------------- --
-  --                Custom Disabled Plugins
-  -- ----------------------------------------------------------- --
-  -- ----------------------------------------------------------- --
   --                AI Plugins
   -- ----------------------------------------------------------- --
   {
     "zbirenbaum/copilot.lua",
-    enabled = false,
+    enabled = true,
     cond = not isVSCode,
     lazy = true,
     cmd = "Copilot",
@@ -504,7 +501,7 @@ return {
 
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = false,
+    enabled = true,
     cond = not isVSCode,
     lazy = true,
     cmd = { "CopilotChat" },
@@ -515,6 +512,10 @@ return {
     },
     opts = {},
   },
+
+  -- ----------------------------------------------------------- --
+  --                Custom Disabled Plugins
+  -- ----------------------------------------------------------- --
 
   -- multicursors.nvim & hydra.nvim(custom keybinding creation)
   {
