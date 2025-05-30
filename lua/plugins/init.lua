@@ -437,18 +437,6 @@ return {
   },
 
   {
-    "hedyhli/outline.nvim",
-    enabled = true,
-    cond = not isVSCode,
-    lazy = true,
-    cmd = { "Outline", "OutlineOpen" },
-    opts = {},
-    keys = {
-      { mode = { "n" }, "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
-    },
-  },
-
-  {
     "bullets-vim/bullets.vim",
     enabled = true,
     cond = not isVSCode,

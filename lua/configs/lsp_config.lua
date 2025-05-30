@@ -31,6 +31,7 @@ local attach = function(client, bufnr)
   map("n", "<leader>k", "<cmd>Lspsaga hover_doc<cr>", { buffer = bufnr, desc = "Lspsaga hover doc" })
   map("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<cr>", { buffer = bufnr, desc = "Lspsaga incoming calls" })
   map("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<cr>", { buffer = bufnr, desc = "Lspsaga outgoing calls" })
+  map("n", "<leader>o", "<cmd>Lspsaga outline<cr>", { buffer = bufnr, desc = "Lspsaga outline" })
 end
 
 chadlsp.defaults()
@@ -136,7 +137,7 @@ lspconfig.hls.setup {
 
 -- markdown-oxide
 lspconfig.markdown_oxide.setup {
-  on_attach = chadlsp.on_attach,
+  on_attach = attach,
   on_init = chadlsp.on_init,
   capabilities = vim.tbl_deep_extend("force", chadlsp.capabilities, {
     workspace = {
