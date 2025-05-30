@@ -208,17 +208,30 @@ return {
         end,
         desc = "flash",
       },
-      {
-        mode = { "n", "x", "o" },
-        "<leader>s",
-        function()
-          require("flash").treesitter()
-        end,
-        desc = "flash  treesitter",
-      },
-      -- { mode = { "o", "x" }, "r"   , function() require("flash").treesitter_search() end, desc = "treesitter search" },
-      -- { mode = { "c" }, "<c-s>", function() require("flash").toggle() end, desc = "toggle flash search" },
-      -- { mode = "o"    , "r"    , function() require("flash").remote() end, desc = "Remote Flash" },
+      -- {
+      --   mode = { "o", "x" },
+      --   "r",
+      --   function()
+      --     require("flash").treesitter_search()
+      --   end,
+      --   desc = "treesitter search",
+      -- },
+      -- {
+      --   mode = { "c" },
+      --   "<c-s>",
+      --   function()
+      --     require("flash").toggle()
+      --   end,
+      --   desc = "toggle flash search",
+      -- },
+      -- {
+      --   mode = "o",
+      --   "r",
+      --   function()
+      --     require("flash").remote()
+      --   end,
+      --   desc = "Remote Flash",
+      -- },
     },
   },
 
@@ -232,36 +245,33 @@ return {
     opts = {},
     keys = {
       {
-        "<leader>xx",
-        "<cmd>Trouble diagnostics toggle<cr>",
-        desc = "Diagnostics (Trouble)",
-      },
-      {
-        "<leader>xX",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-        desc = "Buffer Diagnostics (Trouble)",
-      },
-      {
         "<leader>cs",
         "<cmd>Trouble symbols toggle focus=false<cr>",
         desc = "Symbols (Trouble)",
       },
       {
-        "<leader>cl",
-        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        desc = "LSP Definitions / references / ... (Trouble)",
-      },
-      {
-        "<leader>xL",
+        "<leader>ll",
         "<cmd>Trouble loclist toggle<cr>",
         desc = "Location List (Trouble)",
       },
       {
-        "<leader>xQ",
+        "<leader>qf",
         "<cmd>Trouble qflist toggle<cr>",
         desc = "Quickfix List (Trouble)",
       },
     },
+  },
+
+  {
+    "nvimdev/lspsaga.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    lazy = true,
+    event = "LspAttach",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("lspsaga").setup {}
+    end,
   },
 
   -- manoeuvre around splits b/w multiplexers & nvim-splits
@@ -408,18 +418,6 @@ return {
       -- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
       -- vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
-    end,
-  },
-
-  {
-    "nvimdev/lspsaga.nvim",
-    enabled = true,
-    cond = not isVSCode,
-    lazy = true,
-    event = "LspAttach",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("lspsaga").setup {}
     end,
   },
 
