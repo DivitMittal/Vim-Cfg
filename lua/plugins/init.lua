@@ -123,6 +123,7 @@ return {
     "nmac427/guess-indent.nvim",
     enabled = true,
     cond = not isVSCode,
+    lazy = true,
     event = "InsertEnter",
     opts = {
       auto_cmd = true,
@@ -154,6 +155,7 @@ return {
   {
     "echasnovski/mini.nvim",
     enabled = true,
+    lazy = true,
     event = "BufEnter",
     config = function()
       -- require('mini.jump2d').setup({ labels = 'oienarstwqyxcpl' }) -- EasyMotion/Hop like plugin ( using flash.nvim instead )
@@ -184,6 +186,7 @@ return {
     "folke/flash.nvim",
     enabled = true,
     cond = not isVSCode,
+    lazy = true,
     event = "VeryLazy",
     opts = {
       labels = "tsraneiofuplwykdq",
@@ -224,8 +227,9 @@ return {
     "folke/trouble.nvim",
     enabled = true,
     cond = not isVSCode,
-    opts = {},
+    lazy = true,
     cmd = "Trouble",
+    opts = {},
     keys = {
       {
         "<leader>xx",
@@ -265,6 +269,7 @@ return {
     "mrjones2014/smart-splits.nvim",
     enabled = true,
     cond = not isVSCode,
+    lazy = true,
     event = "BufEnter",
     opts = {},
     keys = {
@@ -376,6 +381,7 @@ return {
     "mikavilpas/yazi.nvim",
     enabled = true,
     cond = not isVSCode,
+    lazy = true,
     event = "VeryLazy",
     dependencies = { "folke/snacks.nvim" },
     keys = {
@@ -405,6 +411,18 @@ return {
     end,
   },
 
+  {
+    "nvimdev/lspsaga.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    lazy = true,
+    event = "LspAttach",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("lspsaga").setup {}
+    end,
+  },
+
   -- ----------------------------------------------------------- --
   --                Notes Plugins
   -- ----------------------------------------------------------- --
@@ -412,8 +430,9 @@ return {
     "MeanderingProgrammer/render-markdown.nvim",
     enabled = true,
     cond = not isVSCode,
-    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
+    lazy = true,
     ft = { "markdown", "Avante" },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
     opts = {
       file_types = { "markdown", "Avante", "vimwiki" },
     },
@@ -435,8 +454,8 @@ return {
     "bullets-vim/bullets.vim",
     enabled = true,
     cond = not isVSCode,
-    event = "BufEnter",
     lazy = true,
+    event = "InsertEnter",
     init = function()
       vim.g.bullets_enabled_filetypes = { "markdown", "text", "gitcommit" }
       vim.g.bullets_enable_in_empty_buffers = 1
@@ -453,6 +472,7 @@ return {
     "zbirenbaum/copilot.lua",
     enabled = false,
     cond = not isVSCode,
+    lazy = true,
     cmd = "Copilot",
     event = "InsertEnter",
     opts = {
@@ -500,12 +520,13 @@ return {
     "CopilotC-Nvim/CopilotChat.nvim",
     enabled = false,
     cond = not isVSCode,
+    lazy = true,
+    cmd = { "CopilotChat" },
     build = "make tiktoken", -- Only on MacOS or Linux
     dependencies = {
       { "zbirenbaum/copilot.lua" },
       { "nvim-lua/plenary.nvim" }, -- for curl, log and async functions
     },
-    event = "VeryLazy",
     opts = {},
   },
 
@@ -515,9 +536,9 @@ return {
     dependencies = { "smoka7/hydra.nvim" },
     enabled = false,
     cond = not isVSCode,
-    event = "VeryLazy",
-    opts = {},
+    lazy = true,
     cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
+    opts = {},
     keys = {
       {
         mode = { "v", "n" },
@@ -533,6 +554,7 @@ return {
     "mfussenegger/nvim-lint",
     enabled = false,
     cond = not isVSCode,
+    lazy = true,
     event = { "BufWritePost", "BufReadPost", "InsertLeave" },
     opts = function(_, _)
       return require "configs.lint_opts"
