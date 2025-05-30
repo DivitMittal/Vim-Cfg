@@ -355,14 +355,6 @@ return {
         end,
         desc = "Lazygit floating window",
       },
-      {
-        mode = { "n" },
-        "<leader>tt",
-        function()
-          require("snacks").terminal.open { "fish" }
-        end,
-        desc = "Terminal floating window",
-      },
     },
   },
 
