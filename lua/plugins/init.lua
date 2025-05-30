@@ -441,7 +441,7 @@ return {
     enabled = true,
     cond = not isVSCode,
     lazy = true,
-    event = "InsertEnter",
+    event = "BufEnter",
     init = function()
       vim.g.bullets_enabled_filetypes = { "markdown", "text", "gitcommit" }
       vim.g.bullets_enable_in_empty_buffers = 1
