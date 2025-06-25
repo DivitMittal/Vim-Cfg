@@ -1,6 +1,6 @@
 dofile(vim.g.base46_cache .. "cmp")
 
-local cmp = require("cmp")
+local cmp = require "cmp"
 
 local options = {
   completion = { completeopt = "menu,menuone" },
@@ -17,10 +17,10 @@ local options = {
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
 
-    ["<CR>"] = cmp.mapping.confirm({
+    ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
-    }),
+    },
 
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -59,4 +59,4 @@ local options = {
   },
 }
 
-return vim.tbl_deep_extend("force", options, require("nvchad.cmp"))
+return vim.tbl_deep_extend("force", options, require "nvchad.cmp")
