@@ -19,5 +19,8 @@
 </div>
 
 ---
+This repository consits of:
 
-A pure lua [neovim](https://github.com/neovim/neovim) configuration over [NvChad](https://nvchad.com/) for [OS-nixCfg](https://github.com/DivitMittal/OS-nixCfg) via [nix home-manager module, i.e., nix4nvchad](https://github.com/nix-community/nix4nvchad)
+- A pure [lua](https://lua.org) [neovim](https://github.com/neovim/neovim) configuration over [NvChad](https://nvchad.com/) for [OS-nixCfg](https://github.com/DivitMittal/OS-nixCfg), deployed via [nix home-manager module, i.e., nix4nvchad](https://github.com/nix-community/nix4nvchad)
+
+- A vimscript [vim](https://vim.org) configuration for [OS-nixCfg](https://github.com/DivitMittal/OS-nixCfg)
