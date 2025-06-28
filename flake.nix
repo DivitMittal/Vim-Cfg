@@ -1,5 +1,5 @@
 {
-  description = "Nvim-Cfg flake";
+  description = "Vim-Cfg flake";
 
   outputs = inputs: let
     inherit (inputs.flake-parts.lib) mkFlake;
