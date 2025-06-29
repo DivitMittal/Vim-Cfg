@@ -437,6 +437,17 @@ return {
   },
 
   {
+    "zk-org/zk-nvim",
+    enabled = true,
+    cond = not isVSCode,
+    lazy = true,
+    ft = { "markdown", "Avante" },
+    config = function()
+      require("zk").setup {}
+    end,
+  },
+
+  {
     "bullets-vim/bullets.vim",
     enabled = true,
     cond = not isVSCode,
