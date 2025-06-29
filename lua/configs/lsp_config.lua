@@ -136,15 +136,15 @@ lspconfig.hls.setup {
 }
 
 -- markdown-oxide
-lspconfig.markdown_oxide.setup {
-  on_attach = attach,
-  on_init = chadlsp.on_init,
-  capabilities = vim.tbl_deep_extend("force", chadlsp.capabilities, {
-    workspace = {
-      didChangeWatchedFiles = {
-        dynamicRegistration = true,
-      },
-    },
-  }),
-  filetypes = { "markdown", "vimwiki" },
-}
+-- lspconfig.markdown_oxide.setup {
+--   on_attach = attach,
+--   on_init = chadlsp.on_init,
+--   capabilities = vim.tbl_deep_extend("force", chadlsp.capabilities, {
+--     workspace = {
+--       didChangeWatchedFiles = {
+--         dynamicRegistration = true,
+--       },
+--     },
+--   }),
+--   filetypes = { "markdown", "vimwiki" },
+-- }
