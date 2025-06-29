@@ -1,8 +1,8 @@
 local lspconfig = require "lspconfig"
 local chadlsp = require "nvchad.configs.lspconfig"
 local attach = function(client, bufnr)
-  local map = vim.keymap.set
   chadlsp.on_attach(client, bufnr)
+  local map = vim.keymap.set
   -- lspsaga
   map("n", "gh", "<cmd>Lspsaga finder<cr>", { buffer = bufnr, desc = "Lspsaga finder" })
   map({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<cr>", { buffer = bufnr, desc = "Lspsaga code action" })
@@ -48,7 +48,6 @@ local servers = {
   "nixd",
   "clangd",
 }
-
 -- lsps with default config
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
