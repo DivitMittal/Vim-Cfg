@@ -15,7 +15,12 @@
 ---
 
 <div align='center'>
-    <img src="https://github.com/DivitMittal/Vim-Cfg/actions/workflows/.github/workflows/flake-check.yml/badge.svg" alt="nix-flake-check"/>
+    <a href="https://github.com/DivitMittal/Vim-Cfg/actions/workflows/flake-check.yml">
+        <img src="https://github.com/DivitMittal/Vim-Cfg/actions/workflows/flake-check.yml/badge.svg" alt="Nix Flake Check"/>
+    </a>
+    <a href="https://github.com/DivitMittal/Vim-Cfg/actions/workflows/flake-lock-update.yml">
+        <img src="https://github.com/DivitMittal/Vim-Cfg/actions/workflows/flake-lock-update.yml/badge.svg" alt="Update Flake Lock"/>
+    </a>
 </div>
 
 ---
