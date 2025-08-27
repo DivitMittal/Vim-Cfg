@@ -373,19 +373,20 @@ return {
     },
   },
 
-  -- vim-vinegar like plugin for filesystem manipulation
-  -- {
-  --   "stevearc/oil.nvim",
-  --   enabled = true,
-  --   cond = not isVSCode,
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
-  --   event = "VeryLazy",
-  --   cmd = "Oil",
-  --   opts = {},
-  --   keys = {
-  --     { mode = { "n" }, "-", "<cmd>Oil<CR>", desc = "Open parent directory" },
-  --   },
-  -- },
+  -- vim-vinegar like plugin for filesystem manipulation (using yazi.nvim)
+  {
+    "stevearc/oil.nvim",
+    enabled = false,
+    cond = not isVSCode,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
+    cmd = "Oil",
+    opts = {},
+    keys = {
+      { mode = { "n" }, "-", "<cmd>Oil<CR>", desc = "Open parent directory" },
+    },
+  },
+
   -- yazi.nvim
   {
     "mikavilpas/yazi.nvim",
@@ -462,6 +463,7 @@ return {
   -- ----------------------------------------------------------- --
   --                AI Plugins
   -- ----------------------------------------------------------- --
+  -- Copilot Autocomplete
   {
     "zbirenbaum/copilot.lua",
     enabled = true,
@@ -510,9 +512,14 @@ return {
     },
   },
 
+
+  -- ----------------------------------------------------------- --
+  --                Custom Disabled Plugins
+  -- ----------------------------------------------------------- --
+  -- Copilot Chat Interface
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = true,
+    enabled = false,
     cond = not isVSCode,
     lazy = true,
     cmd = { "CopilotChat" },
@@ -523,10 +530,6 @@ return {
     },
     opts = {},
   },
-
-  -- ----------------------------------------------------------- --
-  --                Custom Disabled Plugins
-  -- ----------------------------------------------------------- --
 
   -- multicursors.nvim & hydra.nvim(custom keybinding creation)
   {
