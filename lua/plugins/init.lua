@@ -262,6 +262,7 @@ return {
     },
   },
 
+  -- Integrate with LSPs better
   {
     "nvimdev/lspsaga.nvim",
     enabled = true,
@@ -425,6 +426,7 @@ return {
   -- ----------------------------------------------------------- --
   --                Notes Plugins
   -- ----------------------------------------------------------- --
+  -- Markdown preview
   {
     "MeanderingProgrammer/render-markdown.nvim",
     enabled = true,
@@ -437,6 +439,7 @@ return {
     },
   },
 
+  -- Zettelkasten note-taking
   {
     "zk-org/zk-nvim",
     enabled = true,
@@ -445,18 +448,6 @@ return {
     ft = { "markdown", "Avante" },
     config = function()
       require("zk").setup {}
-    end,
-  },
-
-  {
-    "bullets-vim/bullets.vim",
-    enabled = true,
-    cond = not isVSCode,
-    lazy = true,
-    event = "BufEnter",
-    init = function()
-      vim.g.bullets_enabled_filetypes = { "markdown", "text", "gitcommit" }
-      vim.g.bullets_enable_in_empty_buffers = 1
     end,
   },
 
@@ -512,10 +503,22 @@ return {
     },
   },
 
-
   -- ----------------------------------------------------------- --
   --                Custom Disabled Plugins
   -- ----------------------------------------------------------- --
+  -- Automated Markdown bullets
+  {
+    "bullets-vim/bullets.vim",
+    enabled = false,
+    cond = not isVSCode,
+    lazy = true,
+    event = "BufEnter",
+    init = function()
+      vim.g.bullets_enabled_filetypes = { "markdown", "text", "gitcommit" }
+      vim.g.bullets_enable_in_empty_buffers = 1
+    end,
+  },
+
   -- Copilot Chat Interface
   {
     "CopilotC-Nvim/CopilotChat.nvim",
@@ -525,8 +528,8 @@ return {
     cmd = { "CopilotChat" },
     build = "make tiktoken", -- Only on MacOS or Linux
     dependencies = {
-      { "zbirenbaum/copilot.lua" },
-      { "nvim-lua/plenary.nvim" }, -- for curl, log and async functions
+      "zbirenbaum/copilot.lua",
+      "nvim-lua/plenary.nvim", -- for curl, log and async functions
     },
     opts = {},
   },
@@ -534,11 +537,11 @@ return {
   -- multicursors.nvim & hydra.nvim(custom keybinding creation)
   {
     "smoka7/multicursors.nvim",
-    dependencies = { "smoka7/hydra.nvim" },
     enabled = false,
     cond = not isVSCode,
     lazy = true,
     cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
+    dependencies = { "smoka7/hydra.nvim" },
     opts = {},
     keys = {
       {
