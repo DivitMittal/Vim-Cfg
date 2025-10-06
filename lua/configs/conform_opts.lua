@@ -29,5 +29,8 @@ return {
     haskell = { "ormolu" },
     lhaskell = { "ormolu" },
     cabal = { "cabal_fmt" },
+
+    -- macOS
+    swift = { "swift" },
   },
 }
