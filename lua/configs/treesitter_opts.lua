@@ -17,11 +17,14 @@ return {
     "java",
     --'groovy',
     "python",
+    "haskell",
+    "swift",
 
     -- sysadmin
     "bash",
     "nix",
     "powershell",
+    "fish",
 
     -- git
     "diff",
