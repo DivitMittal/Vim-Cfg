@@ -484,8 +484,6 @@ return {
           ratio = 0.4,
         },
         keymap = {
-          jump_prev = "<M-p>",
-          jump_next = "<M-n>",
           accept = "<CR>",
           refresh = "gr",
         },
