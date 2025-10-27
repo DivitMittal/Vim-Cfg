@@ -45,7 +45,7 @@ local servers = {
   "bashls",
   "nixd",
   "clangd",
-  "sourcekit" -- swift
+  "sourcekit", -- swift
 }
 
 vim.lsp.config("emmet_language_server", {
