@@ -75,7 +75,6 @@ vim.lsp.config("ts_ls", {
           vim.fs.dirname(vim.fs.dirname(vim.fn.system "echo -n $(readlink -f $(which vue-language-server))")),
           "lib/node_modules/@vue/language-server"
         ),
-        --
         languages = { "vue" },
       },
     },
