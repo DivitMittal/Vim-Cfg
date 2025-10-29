@@ -48,10 +48,6 @@ return {
     },
   },
 
-  lsp = {
-    signature = true,
-  },
-
   mason = {
     cmd = IsWindows(),
     pkgs = require "configs.mason_pkgs",
