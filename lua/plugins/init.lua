@@ -439,7 +439,7 @@ return {
 
       heading = {
         icons = { "◉ ", "◎ ", "◆ ", "◇ ", "● ", "○ " },
-        left_margin = { 0, 1, 2, 3, 4, 5 },
+        -- left_margin = { 0, 1, 2, 3, 4, 5 },
         min_width = { 100, 70, 60, 50, 40, 30 },
         border = { true, false, false, false, false, false },
         above = "═",
