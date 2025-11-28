@@ -6,6 +6,7 @@ local ft = vim.filetype
 ft.add {
   extension = {
     kbd = "lisp",
+    tidal = "haskell",
   },
   filename = {
     [".condarc"] = "yaml",
