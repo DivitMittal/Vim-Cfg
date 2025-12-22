@@ -1,5 +1,3 @@
-# CLAUDE.md
-
 ## Overview
 
 This repository contains a dual Vim/Neovim configuration system built for NixOS deployment:
