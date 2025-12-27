@@ -426,6 +426,59 @@ return {
   -- ----------------------------------------------------------- --
   --                Notes Plugins
   -- ----------------------------------------------------------- --
+  -- Image pasting from clipboard
+  {
+    "HakonHarnes/img-clip.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    lazy = true,
+    event = "VeryLazy",
+    opts = {
+      default = {
+        dir_path = "assets",
+        extension = "png",
+        file_name = "%Y-%m-%d-%H-%M-%S",
+        use_absolute_path = false,
+        relative_to_current_file = true,
+        prompt_for_file_name = false,
+        embed_image_as_base64 = false,
+        drag_and_drop = {
+          enabled = true,
+          insert_mode = true,
+        },
+      },
+      filetypes = {
+        markdown = {
+          url_encode_path = true,
+          template = "![$CURSOR]($FILE_PATH)",
+          download_images = false,
+        },
+        vimwiki = {
+          url_encode_path = true,
+          template = "![$CURSOR]($FILE_PATH)",
+          download_images = false,
+        },
+        html = {
+          template = '<img src="$FILE_PATH" alt="$CURSOR">',
+        },
+        tex = {
+          relative_template_path = false,
+          template = [[
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{$FILE_PATH}
+  \caption{$CURSOR}
+  \label{fig:$LABEL}
+\end{figure}
+          ]],
+        },
+      },
+    },
+    keys = {
+      { "<leader>pi", "<cmd>PasteImage<cr>", desc = "Paste image from clipboard" },
+    },
+  },
+
   -- Markdown preview
   {
     "MeanderingProgrammer/render-markdown.nvim",
@@ -501,7 +554,7 @@ return {
     lazy = true,
     ft = { "tidal", "haskell", "python", "lua" },
     config = function()
-      local iron = require("iron.core")
+      local iron = require "iron.core"
 
       iron.setup {
         config = {
@@ -520,7 +573,7 @@ return {
             },
           },
 
-          repl_open_cmd = require('iron.view').right(60),
+          repl_open_cmd = require("iron.view").right(60),
         },
 
         keymaps = {
@@ -546,12 +599,12 @@ return {
       -- Add commands to switch between tidal-repl and ghci
       vim.api.nvim_create_user_command("IronUseTidal", function()
         iron.config.repl_definition.haskell = { command = { "tidal-repl" } }
-        print("Haskell REPL set to: tidal-repl")
+        print "Haskell REPL set to: tidal-repl"
       end, { desc = "Use tidal-repl for Haskell" })
 
       vim.api.nvim_create_user_command("IronUseGhci", function()
         iron.config.repl_definition.haskell = { command = { "ghci" } }
-        print("Haskell REPL set to: ghci")
+        print "Haskell REPL set to: ghci"
       end, { desc = "Use ghci for Haskell" })
     end,
     keys = {
@@ -628,6 +681,157 @@ return {
           require("copilot.panel").toggle()
         end,
         desc = "toggle copilot panel",
+      },
+    },
+  },
+
+  -- Avante.nvim - Cursor-like AI IDE
+  {
+    "yetone/avante.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    lazy = true,
+    version = false, -- Never set to "*"
+    event = "VeryLazy",
+    -- Build from prebuilt binaries (use BUILD_FROM_SOURCE=true in make to build from source)
+    build = "make",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "zbirenbaum/copilot.lua", -- for copilot provider support
+      "HakonHarnes/img-clip.nvim", -- for image pasting support
+      "MeanderingProgrammer/render-markdown.nvim", -- for markdown rendering
+    },
+    opts = {
+      -- ACP Provider configurations
+      acp_providers = {
+        ["gemini-cli"] = {
+          command = "gemini",
+          args = { "--experimental-acp" },
+          env = {
+            NODE_NO_WARNINGS = "1",
+            GEMINI_API_KEY = vim.env.GEMINI_API_KEY or vim.env.AVANTE_GEMINI_API_KEY,
+          },
+        },
+        ["claude-code"] = {
+          command = "pnpm",
+          args = { "dlx", "@zed-industries/claude-code-acp" },
+          env = {
+            NODE_NO_WARNINGS = "1",
+            ANTHROPIC_API_KEY = vim.env.ANTHROPIC_API_KEY or vim.env.AVANTE_ANTHROPIC_API_KEY,
+          },
+        },
+        ["codex"] = {
+          command = "codex-acp",
+          env = {
+            NODE_NO_WARNINGS = "1",
+            OPENAI_API_KEY = vim.env.OPENAI_API_KEY or vim.env.AVANTE_OPENAI_API_KEY,
+          },
+        },
+      },
+
+      provider = "claude",
+
+      providers = {
+        copilot = {
+          endpoint = "https://api.githubcopilot.com",
+          model = "gpt-4o-2024-08-06",
+          timeout = 30000,
+          extra_request_body = {
+            temperature = 0.75,
+            max_tokens = 4096,
+          },
+        },
+        claude = {
+          endpoint = "https://api.anthropic.com",
+          model = "claude-3-5-sonnet-20241022",
+          timeout = 30000,
+          extra_request_body = {
+            temperature = 0.75,
+            max_tokens = 4096,
+          },
+        },
+        openai = {
+          endpoint = "https://api.openai.com/v1",
+          model = "gpt-4o",
+          timeout = 30000,
+          extra_request_body = {
+            temperature = 0.75,
+            max_tokens = 4096,
+          },
+        },
+      },
+
+      -- Behavior settings
+      behaviour = {
+        auto_suggestions = false,
+        auto_set_highlight_group = true,
+        auto_set_keymaps = true,
+        auto_apply_diff_after_generation = false,
+        support_paste_from_clipboard = false,
+        minimize_diff = true,
+        enable_token_counting = true,
+        auto_add_current_file = true,
+        auto_approve_tool_permissions = true,
+        confirmation_ui_style = "inline_buttons",
+        acp_follow_agent_locations = true,
+      },
+
+      -- UI settings
+      windows = {
+        position = "right",
+        wrap = true,
+        width = 30,
+        sidebar_header = {
+          enabled = true,
+          align = "center",
+          rounded = true,
+        },
+      },
+
+      -- Hints display
+      hints = {
+        enabled = true,
+      },
+    },
+    keys = {
+      {
+        "<leader>aa",
+        function()
+          require("avante.api").ask()
+        end,
+        desc = "avante: ask",
+        mode = { "n", "v" },
+      },
+      {
+        "<leader>ar",
+        function()
+          require("avante.api").refresh()
+        end,
+        desc = "avante: refresh",
+      },
+      {
+        "<leader>ae",
+        function()
+          require("avante.api").edit()
+        end,
+        desc = "avante: edit",
+        mode = "v",
+      },
+      {
+        "<leader>at",
+        function()
+          require("avante").toggle()
+        end,
+        desc = "avante: toggle",
+      },
+      {
+        "<leader>af",
+        function()
+          require("avante.api").focus()
+        end,
+        desc = "avante: focus",
       },
     },
   },
