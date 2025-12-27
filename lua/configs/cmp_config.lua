@@ -56,6 +56,9 @@ local options = {
     { name = "buffer" },
     { name = "nvim_lua" },
     { name = "path" },
+    { name = "avante_commands" },
+    { name = "avante_mentions" },
+    { name = "avante_files" },
   },
 }
 
