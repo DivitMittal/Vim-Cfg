@@ -647,6 +647,11 @@ return {
     cmd = "Copilot",
     event = "InsertEnter",
     opts = {
+      filetypes = {
+        markdown = false,
+        text = false,
+        ["."] = false,
+      },
       suggestion = {
         enabled = true,
         auto_trigger = true,
