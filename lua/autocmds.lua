@@ -69,3 +69,11 @@ autocmd("BufReadPost", {
     vim.cmd "silent! loadview"
   end,
 })
+
+autocmd("FileType", {
+  group = augroup("hide_statusline", { clear = true }),
+  pattern = { "Avante", "AvanteInput", "AvanteSelectedFiles", "AvanteConflict" },
+  callback = function()
+    vim.wo.statusline = " "
+  end,
+})
