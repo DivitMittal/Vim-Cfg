@@ -435,42 +435,10 @@ return {
     event = "VeryLazy",
     opts = {
       default = {
-        dir_path = "assets",
-        extension = "png",
-        file_name = "%Y-%m-%d-%H-%M-%S",
-        use_absolute_path = false,
         relative_to_current_file = true,
         prompt_for_file_name = false,
-        embed_image_as_base64 = false,
         drag_and_drop = {
-          enabled = true,
           insert_mode = true,
-        },
-      },
-      filetypes = {
-        markdown = {
-          url_encode_path = true,
-          template = "![$CURSOR]($FILE_PATH)",
-          download_images = false,
-        },
-        vimwiki = {
-          url_encode_path = true,
-          template = "![$CURSOR]($FILE_PATH)",
-          download_images = false,
-        },
-        html = {
-          template = '<img src="$FILE_PATH" alt="$CURSOR">',
-        },
-        tex = {
-          relative_template_path = false,
-          template = [[
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.8\textwidth]{$FILE_PATH}
-  \caption{$CURSOR}
-  \label{fig:$LABEL}
-\end{figure}
-          ]],
         },
       },
     },
@@ -709,95 +677,30 @@ return {
       "MeanderingProgrammer/render-markdown.nvim", -- for markdown rendering
     },
     opts = {
-      -- ACP Provider configurations
       acp_providers = {
         ["gemini-cli"] = {
           command = "gemini",
           args = { "--experimental-acp" },
-          env = {
-            NODE_NO_WARNINGS = "1",
-            GEMINI_API_KEY = vim.env.GEMINI_API_KEY or vim.env.AVANTE_GEMINI_API_KEY,
-          },
         },
         ["claude-code"] = {
           command = "pnpm",
           args = { "dlx", "@zed-industries/claude-code-acp" },
-          env = {
-            NODE_NO_WARNINGS = "1",
-            ANTHROPIC_API_KEY = vim.env.ANTHROPIC_API_KEY or vim.env.AVANTE_ANTHROPIC_API_KEY,
-          },
         },
         ["codex"] = {
           command = "codex-acp",
-          env = {
-            NODE_NO_WARNINGS = "1",
-            OPENAI_API_KEY = vim.env.OPENAI_API_KEY or vim.env.AVANTE_OPENAI_API_KEY,
-          },
+        },
+        ["opencode"] = {
+          command = "opencode",
+          args = { "acp" },
         },
       },
-
-      provider = "claude",
-
       providers = {
         copilot = {
-          endpoint = "https://api.githubcopilot.com",
           model = "gpt-4o-2024-08-06",
-          timeout = 30000,
-          extra_request_body = {
-            temperature = 0.75,
-            max_tokens = 4096,
-          },
         },
-        claude = {
-          endpoint = "https://api.anthropic.com",
-          model = "claude-3-5-sonnet-20241022",
-          timeout = 30000,
-          extra_request_body = {
-            temperature = 0.75,
-            max_tokens = 4096,
-          },
+        gemini = {
+          model = "gemini-3.0-flash",
         },
-        openai = {
-          endpoint = "https://api.openai.com/v1",
-          model = "gpt-4o",
-          timeout = 30000,
-          extra_request_body = {
-            temperature = 0.75,
-            max_tokens = 4096,
-          },
-        },
-      },
-
-      -- Behavior settings
-      behaviour = {
-        auto_suggestions = false,
-        auto_set_highlight_group = true,
-        auto_set_keymaps = true,
-        auto_apply_diff_after_generation = false,
-        support_paste_from_clipboard = false,
-        minimize_diff = true,
-        enable_token_counting = true,
-        auto_add_current_file = true,
-        auto_approve_tool_permissions = true,
-        confirmation_ui_style = "inline_buttons",
-        acp_follow_agent_locations = true,
-      },
-
-      -- UI settings
-      windows = {
-        position = "right",
-        wrap = true,
-        width = 30,
-        sidebar_header = {
-          enabled = true,
-          align = "center",
-          rounded = true,
-        },
-      },
-
-      -- Hints display
-      hints = {
-        enabled = true,
       },
     },
     keys = {
