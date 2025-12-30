@@ -14,3 +14,7 @@ map("n", "0", "^", noremap) -- start of line
 map("n", "u", "<Nop>", noremap)
 map("n", "U", "<cmd>undo <CR>", noremap)
 map("n", "R", "<cmd>redo <CR>", noremap)
+
+-- Shift+Tab to dedent
+map("i", "<S-Tab>", "<C-d>", noremap)
+map("v", "<S-Tab>", "<gv", noremap)
