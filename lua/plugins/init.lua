@@ -677,14 +677,11 @@ return {
       "MeanderingProgrammer/render-markdown.nvim", -- for markdown rendering
     },
     opts = {
+      provider = "copilot",
       acp_providers = {
         ["gemini-cli"] = {
           command = "gemini",
           args = { "--experimental-acp" },
-        },
-        ["claude-code"] = {
-          command = "pnpm",
-          args = { "dlx", "@zed-industries/claude-code-acp" },
         },
         ["codex"] = {
           command = "codex-acp",
@@ -696,7 +693,7 @@ return {
       },
       providers = {
         copilot = {
-          model = "gpt-4o-2024-08-06",
+          model = "claude-sonnet-4.5",
         },
         gemini = {
           model = "gemini-3.0-flash",
