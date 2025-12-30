@@ -10,6 +10,10 @@ nnoremap U <cmd>undo<cr>
 nnoremap R <cmd>redo<cr>
 nnoremap u <nop>
 
+" Shift+Tab to dedent
+inoremap <S-Tab> <C-d>
+vnoremap <S-Tab> <gv
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
