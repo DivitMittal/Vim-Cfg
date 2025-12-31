@@ -453,10 +453,10 @@ return {
     enabled = true,
     cond = not isVSCode,
     lazy = true,
-    ft = { "markdown", "Avante" },
+    ft = { "markdown", "codecompanion" },
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
     opts = {
-      file_types = { "markdown", "Avante", "vimwiki" },
+      file_types = { "markdown", "codecompanion", "vimwiki" },
 
       heading = {
         icons = { "◉ ", "◎ ", "◆ ", "◇ ", "● ", "○ " },
@@ -505,7 +505,7 @@ return {
     enabled = true,
     cond = not isVSCode,
     lazy = true,
-    ft = { "markdown", "Avante" },
+    ft = { "markdown" },
     config = function()
       require("zk").setup {}
     end,
@@ -658,87 +658,84 @@ return {
     },
   },
 
-  -- Avante.nvim - Cursor-like AI IDE
+  -- CodeCompanion.nvim - AI-powered coding companion
   {
-    "yetone/avante.nvim",
+    "olimorris/codecompanion.nvim",
     enabled = true,
     cond = not isVSCode,
     lazy = true,
-    version = false, -- Never set to "*"
     event = "VeryLazy",
-    -- Build from prebuilt binaries (use BUILD_FROM_SOURCE=true in make to build from source)
-    build = "make",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "zbirenbaum/copilot.lua", -- for copilot provider support
-      "HakonHarnes/img-clip.nvim", -- for image pasting support
-      "MeanderingProgrammer/render-markdown.nvim", -- for markdown rendering
+      "nvim-treesitter/nvim-treesitter",
+      "zbirenbaum/copilot.lua",
+      "MeanderingProgrammer/render-markdown.nvim",
     },
     opts = {
-      provider = "copilot",
-      acp_providers = {
-        ["gemini-cli"] = {
-          command = "gemini",
-          args = { "--experimental-acp" },
+      adapters = {
+        copilot = function()
+          return require("codecompanion.adapters").extend("copilot", {
+            schema = {
+              model = {
+                default = "claude-sonnet-4.5",
+              },
+            },
+          })
+        end,
+        gemini_cli = function()
+          return require("codecompanion.adapters").extend("gemini_cli", {
+            commands = {
+              default = {
+                "gemini",
+                "--experimental-acp",
+                "--yolo",
+                "-m",
+                "gemini-3.0-pro",
+              },
+            },
+            defaults = {
+              auth_method = "oauth-personal",
+            },
+          })
+        end,
+        opencode = function()
+          return require("codecompanion.adapters").extend("opencode", {
+            commands = {
+              default = {
+                "opencode",
+                "acp",
+              },
+            },
+          })
+        end,
+      },
+      strategies = {
+        chat = {
+          adapter = "copilot",
         },
-        ["codex"] = {
-          command = "codex-acp",
-        },
-        ["opencode"] = {
-          command = "opencode",
-          args = { "acp" },
+        inline = {
+          adapter = "copilot",
         },
       },
-      providers = {
-        copilot = {
-          model = "claude-sonnet-4.5",
+      display = {
+        chat = {
+          show_token_count = true,
         },
-        gemini = {
-          model = "gemini-3.0-flash",
+        action_palette = {
+          provider = "default",
         },
       },
     },
     keys = {
-      {
-        "<leader>aa",
-        function()
-          require("avante.api").ask()
-        end,
-        desc = "avante: ask",
-        mode = { "n", "v" },
-      },
-      {
-        "<leader>ar",
-        function()
-          require("avante.api").refresh()
-        end,
-        desc = "avante: refresh",
-      },
-      {
-        "<leader>ae",
-        function()
-          require("avante.api").edit()
-        end,
-        desc = "avante: edit",
-        mode = "v",
-      },
-      {
-        "<leader>at",
-        function()
-          require("avante").toggle()
-        end,
-        desc = "avante: toggle",
-      },
-      {
-        "<leader>af",
-        function()
-          require("avante.api").focus()
-        end,
-        desc = "avante: focus",
-      },
+      { "<leader>aa", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "codecompanion: actions" },
+      { "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "codecompanion: toggle chat" },
+      { "<leader>ae", "<cmd>CodeCompanionChat Add<cr>", mode = "v", desc = "codecompanion: add to chat" },
+      { "<leader>ai", "<cmd>CodeCompanion<cr>", mode = { "n", "v" }, desc = "codecompanion: inline prompt" },
     },
+    config = function(_, opts)
+      require("codecompanion").setup(opts)
+      vim.cmd [[cab cc CodeCompanion]]
+    end,
   },
 
   -- ----------------------------------------------------------- --
