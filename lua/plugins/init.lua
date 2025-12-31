@@ -690,7 +690,7 @@ return {
                 "--experimental-acp",
                 "--yolo",
                 "-m",
-                "gemini-3.0-pro",
+                "gemini-3-pro-preview",
               },
             },
             defaults = {
