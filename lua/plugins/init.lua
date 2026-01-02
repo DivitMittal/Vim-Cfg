@@ -426,6 +426,19 @@ return {
   -- ----------------------------------------------------------- --
   --                Notes Plugins
   -- ----------------------------------------------------------- --
+  -- Image rendering in Neovim
+  {
+    "3rd/image.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    lazy = true,
+    event = "VeryLazy",
+    build = false, -- prevents building the rock
+    opts = {
+      processor = "magick_cli",
+    },
+  },
+
   -- Image pasting from clipboard
   {
     "HakonHarnes/img-clip.nvim",
