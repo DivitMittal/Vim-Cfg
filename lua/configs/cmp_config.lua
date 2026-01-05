@@ -12,11 +12,24 @@ local options = {
   },
 
   mapping = {
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
+    -- Use Up/Down to navigate completions
+    ["<Down>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
 
+    ["<Up>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    -- Use Tab and Return to confirm selection
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
@@ -24,7 +37,10 @@ local options = {
 
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_next_item()
+        cmp.confirm {
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        }
       elseif require("luasnip").expand_or_jumpable() then
         require("luasnip").expand_or_jump()
       else
@@ -33,9 +49,7 @@ local options = {
     end, { "i", "s" }),
 
     ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif require("luasnip").jumpable(-1) then
+      if require("luasnip").jumpable(-1) then
         require("luasnip").jump(-1)
       else
         fallback()
@@ -44,22 +58,12 @@ local options = {
   },
 
   sources = {
-    {
-      name = "nvim_lsp",
-      option = {
-        -- markdown_oxide = {
-        --   keyword_pattern = [[\(\k\| \|\/\|#\)\+]],
-        -- },
-      },
-    },
+    { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "nvim_lua" },
     { name = "path" },
-    { name = "avante_commands" },
-    { name = "avante_mentions" },
-    { name = "avante_files" },
   },
 }
 
-return vim.tbl_deep_extend("force", options, require "nvchad.cmp")
+return vim.tbl_deep_extend("force", require "nvchad.cmp", options)
