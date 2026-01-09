@@ -95,8 +95,143 @@ return {
     lazy = true,
     ft = { "markdown" },
     config = function()
-      require("zk").setup {}
+      require("zk").setup {
+        -- Picker for selecting notes (telescope, fzf, fzf_lua, minipick, or "select")
+        picker = "telescope",
+
+        -- LSP integration for autocompletion, hover, go-to-definition, etc.
+        lsp = {
+          config = {
+            cmd = { "zk", "lsp" },
+            name = "zk",
+            on_attach = function(client, bufnr)
+              -- Custom LSP keybindings specific to zk
+              local bufopts = { buffer = bufnr, silent = true }
+
+              -- Link management
+              vim.keymap.set("n", "<CR>", "<cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
+              vim.keymap.set("i", "[[", "[[", bufopts) -- Trigger LSP completion for links
+            end,
+          },
+          auto_attach = {
+            enabled = true,
+            filetypes = { "markdown" },
+          },
+        },
+      }
+
+      -- Custom commands for common workflows
+      local commands = require "zk.commands"
+
+      -- Find orphaned notes (notes with no incoming links)
+      commands.add("ZkOrphans", function(options)
+        options = vim.tbl_extend("force", { orphan = true }, options or {})
+        require("zk").edit(options, { title = "Orphan Notes" })
+      end)
+
+      -- Recently modified notes
+      commands.add("ZkRecents", function(options)
+        options = vim.tbl_extend("force", { sort = { "modified" }, limit = 15 }, options or {})
+        require("zk").edit(options, { title = "Recent Notes" })
+      end)
+
+      -- Notes modified today
+      commands.add("ZkToday", function(options)
+        options = vim.tbl_extend("force", { createdAfter = "today" }, options or {})
+        require("zk").edit(options, { title = "Today's Notes" })
+      end)
+
+      -- Notes by tag
+      commands.add("ZkByTag", function(options)
+        local tag = vim.fn.input "Tag: "
+        if tag ~= "" then
+          options = vim.tbl_extend("force", { tags = { tag } }, options or {})
+          require("zk").edit(options, { title = "Notes tagged #" .. tag })
+        end
+      end)
     end,
+
+    keys = {
+      -- Note creation
+      {
+        "<leader>zn",
+        function()
+          local title = vim.fn.input "Title: "
+          if title ~= "" then
+            vim.cmd("ZkNew { title = '" .. title .. "' }")
+          end
+        end,
+        desc = "New note",
+        ft = "markdown",
+      },
+      {
+        "<leader>zN",
+        function()
+          local title = vim.fn.input "Title: "
+          local dir = vim.fn.input "Directory: "
+          if title ~= "" then
+            vim.cmd("ZkNew { title = '" .. title .. "', dir = '" .. dir .. "' }")
+          end
+        end,
+        desc = "New note in directory",
+        ft = "markdown",
+      },
+      {
+        "<leader>zd",
+        "<cmd>ZkNew { title = vim.fn.strftime('%Y-%m-%d'), dir = 'daily' }<cr>",
+        desc = "Daily note",
+        ft = "markdown",
+      },
+
+      -- Note discovery
+      { "<leader>zo", "<cmd>ZkNotes { sort = { 'modified' } }<cr>", desc = "Open notes", ft = "markdown" },
+      {
+        "<leader>zf",
+        function()
+          local search = vim.fn.input "Search: "
+          if search ~= "" then
+            vim.cmd("ZkNotes { sort = { 'modified' }, match = { '" .. search .. "' } }")
+          end
+        end,
+        desc = "Find notes by content",
+        ft = "markdown",
+      },
+      { "<leader>zt", "<cmd>ZkTags<cr>", desc = "Browse tags", ft = "markdown" },
+      { "<leader>zT", "<cmd>ZkByTag<cr>", desc = "Notes by tag", ft = "markdown" },
+
+      -- Link management (works with lspsaga's `gd`, `gp`, `gh`)
+      { "<leader>zl", "<cmd>ZkLinks<cr>", desc = "Outgoing links", ft = "markdown" },
+      { "<leader>zb", "<cmd>ZkBacklinks<cr>", desc = "Incoming links (backlinks)", ft = "markdown" },
+      {
+        "<leader>zi",
+        ":'<,'>ZkInsertLinkAtSelection<cr>",
+        desc = "Insert link from selection",
+        mode = "v",
+        ft = "markdown",
+      },
+      { "<leader>zi", "<cmd>ZkInsertLink<cr>", desc = "Insert link", mode = "n", ft = "markdown" },
+
+      -- Custom workflows
+      { "<leader>zr", "<cmd>ZkRecents<cr>", desc = "Recent notes", ft = "markdown" },
+      { "<leader>zp", "<cmd>ZkOrphans<cr>", desc = "Orphan notes", ft = "markdown" },
+      { "<leader>zy", "<cmd>ZkToday<cr>", desc = "Today's notes", ft = "markdown" },
+
+      -- Context-aware note creation from visual selection
+      {
+        "<leader>zn",
+        ":'<,'>ZkNewFromTitleSelection<cr>",
+        desc = "New note from selection",
+        mode = "v",
+        ft = "markdown",
+      },
+      {
+        "<leader>zc",
+        ":'<,'>ZkNewFromContentSelection { dir = vim.fn.input('Directory: ') }<cr>",
+        desc = "New note from content",
+        mode = "v",
+        ft = "markdown",
+      },
+    },
   },
 
   -- ----------------------------------------------------------- --
