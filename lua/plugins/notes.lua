@@ -177,9 +177,17 @@ return {
         ft = "markdown",
       },
       {
-        "<leader>zd",
-        "<cmd>ZkNew { title = vim.fn.strftime('%Y-%m-%d'), dir = 'daily' }<cr>",
-        desc = "Daily note",
+        "<leader>zn",
+        ":'<,'>ZkNewFromTitleSelection<cr>",
+        desc = "New note from selection",
+        mode = "v",
+        ft = "markdown",
+      },
+      {
+        "<leader>zc",
+        ":'<,'>ZkNewFromContentSelection { dir = vim.fn.input('Directory: ') }<cr>",
+        desc = "New note from content",
+        mode = "v",
         ft = "markdown",
       },
 
@@ -196,7 +204,6 @@ return {
         desc = "Find notes by content",
         ft = "markdown",
       },
-      { "<leader>zt", "<cmd>ZkTags<cr>", desc = "Browse tags", ft = "markdown" },
       { "<leader>zT", "<cmd>ZkByTag<cr>", desc = "Notes by tag", ft = "markdown" },
 
       -- Link management (works with lspsaga's `gd`, `gp`, `gh`)
@@ -214,23 +221,7 @@ return {
       -- Custom workflows
       { "<leader>zr", "<cmd>ZkRecents<cr>", desc = "Recent notes", ft = "markdown" },
       { "<leader>zp", "<cmd>ZkOrphans<cr>", desc = "Orphan notes", ft = "markdown" },
-      { "<leader>zy", "<cmd>ZkToday<cr>", desc = "Today's notes", ft = "markdown" },
-
-      -- Context-aware note creation from visual selection
-      {
-        "<leader>zn",
-        ":'<,'>ZkNewFromTitleSelection<cr>",
-        desc = "New note from selection",
-        mode = "v",
-        ft = "markdown",
-      },
-      {
-        "<leader>zc",
-        ":'<,'>ZkNewFromContentSelection { dir = vim.fn.input('Directory: ') }<cr>",
-        desc = "New note from content",
-        mode = "v",
-        ft = "markdown",
-      },
+      { "<leader>zt", "<cmd>ZkToday<cr>", desc = "Today's notes", ft = "markdown" },
     },
   },
 
