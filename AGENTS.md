@@ -53,42 +53,14 @@ The project provides a Nix development shell with:
 # Enter development shell with all tools
 nix develop
 
-# Run formatting checks
-nix fmt
-
-# Run all flake checks (linting, formatting, validation)
-nix flake check --impure --all-systems
-
 # Format all code
 nix fmt
 ```
-
-### Code Formatting
-```bash
-# Format Lua files
-stylua .
-
-# Format Nix files
-alejandra .
-```
-
-### Pre-commit Hooks
-The repository uses automated pre-commit hooks for:
-- Trailing whitespace removal
-- Large file detection
-- Merge conflict detection
-- Private key detection
-- Executable script validation
-- GitHub Actions workflow rendering
 
 ### Testing and Validation
 ```bash
 # Validate flake structure and dependencies
 nix flake check --impure --all-systems --no-build
-
-# Check for Nix code issues
-statix check .
-deadnix .
 ```
 
 ## Language Server Configuration
@@ -112,25 +84,6 @@ The Neovim configuration includes comprehensive LSP support for:
 - **YAML**: yaml-language-server
 - **TOML**: taplo language server
 - **XML**: xmlformatter
-
-### LSP Key Bindings (via Lspsaga)
-- `gh`: Find references
-- `<leader>ca`: Code actions
-- `gr`: Rename symbol
-- `gp`: Peek definition
-- `gd`: Go to definition
-- `gt`: Peek type definition
-- `<leader>dl`: Show line diagnostics
-- `<leader>dw`: Show workspace diagnostics
-- `<leader>k`: Hover documentation
-- `<leader>o`: Toggle outline
-
-## Theme and UI Configuration
-
-**Theme**: "gatekeeper" with transparency enabled
-**Integrations**: Git, completion, indent guides
-**Statusline**: Round separator style
-**Terminal**: Shows line numbers and relative numbers
 
 ## Deployment
 
