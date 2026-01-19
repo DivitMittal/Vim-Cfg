@@ -91,3 +91,7 @@ The repository is organized for reproducible Nix-based deployment with modular L
 ├── README.md
 └── TODO.md
 ```
+
+## Related Repositories
+
+- [DivitMittal/OS-nixCfg](https://github.com/DivitMittal/OS-nixCfg): Main Nix configurations repository
