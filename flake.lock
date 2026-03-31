@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "OS-nixCfg": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1774649897,
-        "narHash": "sha256-6Du8nmbLqAHOFwS62k+AyPOSQtOd+A6veu5yRY0r6n0=",
-        "owner": "DivitMittal",
-        "repo": "OS-nixCfg",
-        "rev": "fc3359da9e6d4b55377d85056ce141b2449bf107",
-        "type": "github"
-      },
-      "original": {
-        "owner": "DivitMittal",
-        "repo": "OS-nixCfg",
-        "type": "github"
-      }
-    },
     "actions-nix": {
       "inputs": {
         "flake-parts": [
@@ -105,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774104215,
-        "narHash": "sha256-EAtviqz0sEAxdHS4crqu7JGR5oI3BwaqG0mw7CmXkO8=",
+        "lastModified": 1774959120,
+        "narHash": "sha256-Pzk6UbueeWy9WFiDY6iA1aHid+2AMzkS6gg2x2cSkz4=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "f799ae951fde0627157f40aec28dec27b22076d0",
+        "rev": "c06f90f1eb6569bdaf6a4a10cb7e66db4454ac2a",
         "type": "github"
       },
       "original": {
@@ -139,13 +123,28 @@
         "type": "github"
       }
     },
+    "import-tree": {
+      "locked": {
+        "lastModified": 1773693634,
+        "narHash": "sha256-BtZ2dtkBdSUnFPPFc+n0kcMbgaTxzFNPv2iaO326Ffg=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "c41e7d58045f9057880b0d85e1152d6a4430dbf1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "import-tree",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1774610258,
-        "narHash": "sha256-HaThtroVD9wRdx7KQk0B75JmFcXlMUoEdDFNOMOlsOs=",
+        "lastModified": 1774855581,
+        "narHash": "sha256-YkreHeMgTCYvJ5fESV0YyqQK49bHGe2B51tH6claUh4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "832efc09b4caf6b4569fbf9dc01bec3082a00611",
+        "rev": "15c6719d8c604779cf59e03c245ea61d3d7ab69b",
         "type": "github"
       },
       "original": {
@@ -172,11 +171,11 @@
     },
     "root": {
       "inputs": {
-        "OS-nixCfg": "OS-nixCfg",
         "actions-nix": "actions-nix",
         "devshell": "devshell",
         "flake-parts": "flake-parts",
         "git-hooks": "git-hooks",
+        "import-tree": "import-tree",
         "nixpkgs": "nixpkgs",
         "systems": "systems",
         "treefmt-nix": "treefmt-nix"
