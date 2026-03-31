@@ -225,6 +225,23 @@ return {
     },
   },
 
+  -- Most Dangerous Writing App - lose everything if you stop writing
+  {
+    "tihawk/mdwa.nvim",
+    enabled = true,
+    cond = not isVSCode,
+    lazy = true,
+    cmd = { "Mdwa" },
+    opts = {
+      default_duration = 180, -- 3 minutes
+      max_inactivity = 5, -- seconds before losing everything
+      use_tabs = true,
+    },
+    keys = {
+      { "<leader>mw", "<cmd>Mdwa<cr>", desc = "Start writing session (MDWA)" },
+    },
+  },
+
   -- ----------------------------------------------------------- --
   --                   Disabled Plugins
   -- ----------------------------------------------------------- --
