@@ -19,6 +19,8 @@
       statix.enable = true;
       ## Lua
       stylua.enable = true;
+      ## LaTeX
+      latexindent.enable = true;
     };
   };
 }
