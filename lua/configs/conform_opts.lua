@@ -6,11 +6,11 @@ return {
     c = { "clang-format" },
     cpp = { "clang-format" },
 
-    -- prettier
+    -- prettier (web) / mdformat (markdown)
     html = { "prettier" },
     css = { "prettier" },
     javascript = { "prettier" },
-    markdown = { "prettier" },
+    markdown = { "mdformat" },
     yaml = { "prettier" },
     json = { "prettier" },
     typescript = { "prettier" },

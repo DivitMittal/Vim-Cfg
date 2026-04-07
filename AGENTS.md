@@ -76,6 +76,7 @@ The Neovim configuration includes comprehensive LSP support for:
 
 **Web Development**:
 - **HTML/CSS**: html-lsp, css-lsp with prettier formatting
+- **Markdown**: mdformat formatting
 - **JavaScript/TypeScript**: deno, ts_ls with eslint linting
 - **Vue**: Vue TypeScript plugin integration
 - **Emmet**: Emmet language server for HTML/CSS shortcuts
