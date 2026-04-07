@@ -15,7 +15,8 @@ return {
   "css-lsp", -- lsp
   "deno", -- lsp
   "eslint_d", -- linter
-  "prettier", -- formatter (json, html, css, javascript, typescript)
+  "prettier", -- formatter (json, html, css, javascript, typescript, yaml)
+  "mdformat", -- formatter (markdown)
 
   -- python
   "python-lsp-server", -- lsp
