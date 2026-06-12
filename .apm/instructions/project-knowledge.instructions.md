@@ -1,3 +1,8 @@
+---
+description: Project knowledge for dual Vim/Neovim NvChad-based configuration deployed via Nix flakes
+applyTo: "**"
+---
+
 ## Overview
 
 This repository contains a dual Vim/Neovim configuration system built for NixOS deployment:
