@@ -43,7 +43,6 @@ set.laststatus = 2 -- always show status line
 --set.scrolloff     = 1                                  -- when scrolling, keep cursor 1 lines away from screen border
 --set.sidescrolloff = 2                                  -- keep 30 columns visible left and right of the cursor at all times
 set.backspace = "indent,start,eol" -- make backspace behave like normal again
-set.lazyredraw = true -- faster scrolling
 set.updatetime = 1000 -- CursorHold interval
 set.completeopt = "menuone,noselect,noinsert" -- completion options
 set.inccommand = "split" -- live preview of :s results
