@@ -22,3 +22,6 @@ apm_modules/
 .claude/
 .mcp.json
 opencode.json
+AGENTS.md
+CLAUDE.md
+GEMINI.md
