@@ -69,3 +69,13 @@ autocmd("BufReadPost", {
     vim.cmd "silent! loadview"
   end,
 })
+
+-- render-markdown.nvim relies on clean whitespace rendering; listchars with
+-- space/eol markers corrupt heading backgrounds and virtual text overlays.
+autocmd("FileType", {
+  group = augroup("markdown_options", { clear = true }),
+  pattern = { "markdown", "codecompanion" },
+  callback = function()
+    vim.opt_local.list = false
+  end,
+})
