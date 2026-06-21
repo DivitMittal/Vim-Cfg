@@ -1,0 +1,30 @@
+lockfile_version: '1'
+generated_at: '2026-06-21T04:33:46.906149+00:00'
+dependencies: []
+mcp_servers:
+- serena
+mcp_configs:
+  serena:
+    name: serena
+    transport: stdio
+    args:
+    - --from
+    - git+https://github.com/oraios/serena
+    - serena
+    - start-mcp-server
+    - --context
+    - claude-code
+    - --project
+    - ~/Projects/Cfgs/Vim-Cfg/
+    registry: false
+    command: uvx
+local_deployed_files:
+- .claude/rules/flake-context.md
+- .claude/rules/lua-context.md
+- .claude/rules/project-knowledge.md
+- .claude/rules/vim-context.md
+local_deployed_file_hashes:
+  .claude/rules/flake-context.md: sha256:2fb8915149a2fa7d6ed41a29164eaac54259a72e208610f277a1c3116dc64ee4
+  .claude/rules/lua-context.md: sha256:1383b2461b288b7e971a0da0ba3b7707977e7d9ce99f2bcdfda6933b156811f6
+  .claude/rules/project-knowledge.md: sha256:ba6b21c4becc5e1969ba2ac3dea8f3701f1500ad6917814e12aba59756f06d21
+  .claude/rules/vim-context.md: sha256:8418cda536c92420fc800a119bcef3b2854545752823b7a75eec6c55206cb7a5

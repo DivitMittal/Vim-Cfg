@@ -14,12 +14,13 @@ result-*
 
 ## Agent Tools
 .serena/
-*local.json
+.omo/
 
 ## APM — generated; do not edit directly
 apm_modules/
 .codex/
 .claude/
+.opencode/
 .mcp.json
 opencode.json
 AGENTS.md

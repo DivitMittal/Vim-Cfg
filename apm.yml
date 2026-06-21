@@ -3,7 +3,10 @@ version: 1.0.0
 description: Dual Vim/Neovim configuration (NvChad-based Lua + vimscript) deployed via Nix flakes
 author: DivitMittal
 license: MIT
-target: all
+target:
+  - claude
+  - codex
+  - opencode
 type: instructions
 
 dependencies:
