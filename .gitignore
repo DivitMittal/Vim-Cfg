@@ -26,3 +26,6 @@ opencode.json
 AGENTS.md
 CLAUDE.md
 GEMINI.md
+
+## git worktrees
+.worktrees/
