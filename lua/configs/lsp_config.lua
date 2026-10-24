@@ -16,7 +16,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     map("n", "gh", "<cmd>Lspsaga finder<cr>", opts "Lspsaga finder")
     map({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts "Lspsaga code action")
-    map("n", "gr", "<cmd>Lspsaga rename<cr>", opts "Lspsaga rename")
+    -- grn rather than gr: a buffer-local gr would stall nvim's builtin gr* maps behind timeoutlen
+    map("n", "grn", "<cmd>Lspsaga rename<cr>", opts "Lspsaga rename")
 
     map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts "Lspsaga show line diagnostics")
     map("n", "<leader>dw", "<cmd>Lspsaga show_workspace_diagnostics<cr>", opts "Lspsaga show workspace diagnostics")
