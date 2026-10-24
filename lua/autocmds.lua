@@ -49,8 +49,16 @@ autocmd("BufReadPost", {
 autocmd("BufWritePre", {
   group = augroup("remove_trailing_whitespaces", { clear = true }),
   pattern = "?*",
-  callback = function()
-    vim.cmd [[%s/\s\+$//e]]
+  callback = function(args)
+    local bo = vim.bo[args.buf]
+    -- markdown uses two trailing spaces as a hard line break; diffs carry meaningful whitespace
+    if bo.binary or not bo.modifiable or vim.tbl_contains({ "markdown", "diff" }, bo.filetype) then
+      return
+    end
+    -- :s leaves the cursor on the last substituted line, so restore the view
+    local view = vim.fn.winsaveview()
+    vim.cmd [[silent keeppatterns %s/\s\+$//e]]
+    vim.fn.winrestview(view)
   end,
 })
 
