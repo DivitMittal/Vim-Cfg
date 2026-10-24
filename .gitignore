@@ -27,5 +27,5 @@ AGENTS.md
 CLAUDE.md
 GEMINI.md
 
-## git worktrees kept inside the project directory
+## git worktrees
 .worktrees/
