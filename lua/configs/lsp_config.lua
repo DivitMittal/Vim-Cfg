@@ -66,6 +66,11 @@ vim.lsp.config("emmet_language_server", {
   },
 })
 
+-- nixd logs info-level chatter to stderr, which nvim records as ERROR in lsp.log
+vim.lsp.config("nixd", {
+  cmd = { "nixd", "--log=error" },
+})
+
 vim.lsp.config("hls", {
   filetypes = { "haskell", "lhaskell", "cabal" },
 })
