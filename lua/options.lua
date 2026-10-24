@@ -66,7 +66,7 @@ set.shiftround = true -- round shiftwidth to the nearest multiple of shiftwidth
 set.smartindent = true -- indent the current line according to the previous line
 set.autoindent = true -- maintain indent of current line
 
-set.shell = "fish" -- shell to use for `!`, `:!`, `system()` etc.
+set.shell = "dash" -- shell to use for `!`, `:!`, `system()` etc.; fish's startup cost hit every shell-out
 
 set.splitbelow = true -- open horizontal splits below current window
 set.splitright = true -- open vertical splits to the right of the current window
