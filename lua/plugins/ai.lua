@@ -60,7 +60,8 @@ return {
     enabled = true,
     cond = not isVSCode,
     lazy = true,
-    event = "VeryLazy",
+    -- no startup event: it would drag copilot.lua (and its node server) into every session
+    cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions", "CodeCompanionCmd" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -122,8 +123,8 @@ return {
       { "<leader>ae", "<cmd>CodeCompanionChat Add<cr>", mode = "v", desc = "codecompanion: add to chat" },
       { "<leader>ai", "<cmd>CodeCompanion<cr>", mode = { "n", "v" }, desc = "codecompanion: inline prompt" },
     },
-    config = function(_, opts)
-      require("codecompanion").setup(opts)
+    -- defined in init so `:cc` exists before the plugin loads (expanding it triggers the cmd lazy-load)
+    init = function()
       vim.cmd [[cab cc CodeCompanion]]
     end,
   },
