@@ -70,11 +70,35 @@ autocmd("BufReadPost", {
   end,
 })
 
-autocmd("BufReadPost", {
-  group = augroup("load_folds", { clear = true }),
+-- persist manual folds across sessions; viewoptions is narrowed to folds so views
+-- neither change the cwd nor fight jump_to_last_position over the cursor
+vim.opt.viewoptions = { "folds" }
+
+local fold_views = augroup("persist_folds", { clear = true })
+
+---@param buf integer
+---@return boolean
+local function has_view(buf)
+  return vim.bo[buf].buftype == "" and vim.api.nvim_buf_get_name(buf) ~= ""
+end
+
+autocmd("BufWinLeave", {
+  group = fold_views,
   pattern = "?*",
-  callback = function()
-    vim.cmd "silent! loadview"
+  callback = function(args)
+    if has_view(args.buf) then
+      vim.cmd "silent! mkview"
+    end
+  end,
+})
+
+autocmd("BufWinEnter", {
+  group = fold_views,
+  pattern = "?*",
+  callback = function(args)
+    if has_view(args.buf) then
+      vim.cmd "silent! loadview"
+    end
   end,
 })
 
