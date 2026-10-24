@@ -110,7 +110,6 @@ return {
 
               -- Link management
               vim.keymap.set("n", "<CR>", "<cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
-              vim.keymap.set("i", "[[", "[[", bufopts) -- Trigger LSP completion for links
             end,
           },
           auto_attach = {
@@ -158,7 +157,7 @@ return {
         function()
           local title = vim.fn.input "Title: "
           if title ~= "" then
-            vim.cmd("ZkNew { title = '" .. title .. "' }")
+            require("zk").new { title = title }
           end
         end,
         desc = "New note",
@@ -170,7 +169,7 @@ return {
           local title = vim.fn.input "Title: "
           local dir = vim.fn.input "Directory: "
           if title ~= "" then
-            vim.cmd("ZkNew { title = '" .. title .. "', dir = '" .. dir .. "' }")
+            require("zk").new { title = title, dir = dir ~= "" and dir or nil }
           end
         end,
         desc = "New note in directory",
@@ -198,7 +197,7 @@ return {
         function()
           local search = vim.fn.input "Search: "
           if search ~= "" then
-            vim.cmd("ZkNotes { sort = { 'modified' }, match = { '" .. search .. "' } }")
+            require("zk").edit({ sort = { "modified" }, match = { search } }, { title = "Zk Notes" })
           end
         end,
         desc = "Find notes by content",
