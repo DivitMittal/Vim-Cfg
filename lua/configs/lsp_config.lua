@@ -16,7 +16,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     map("n", "gh", "<cmd>Lspsaga finder<cr>", opts "Lspsaga finder")
     map({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts "Lspsaga code action")
-    map("n", "gr", "<cmd>Lspsaga rename<cr>", opts "Lspsaga rename")
+    -- grn rather than gr: a buffer-local gr would stall nvim's builtin gr* maps behind timeoutlen
+    map("n", "grn", "<cmd>Lspsaga rename<cr>", opts "Lspsaga rename")
 
     map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts "Lspsaga show line diagnostics")
     map("n", "<leader>dw", "<cmd>Lspsaga show_workspace_diagnostics<cr>", opts "Lspsaga show workspace diagnostics")
@@ -65,27 +66,9 @@ vim.lsp.config("emmet_language_server", {
   },
 })
 
-vim.lsp.config("ts_ls", {
-  init_options = {
-    plugins = {
-      {
-        name = "@vue/typescript-plugin",
-        -- it's a hack for nixOS /nix/store/
-        location = vim.fs.joinpath(
-          vim.fs.dirname(vim.fs.dirname(vim.fn.system "echo -n $(readlink -f $(which vue-language-server))")),
-          "lib/node_modules/@vue/language-server"
-        ),
-        languages = { "vue" },
-      },
-    },
-  },
-  filetypes = {
-    "typescript",
-    "javascript",
-    "javascriptreact",
-    "typescriptreact",
-    "vue",
-  },
+-- nixd logs info-level chatter to stderr, which nvim records as ERROR in lsp.log
+vim.lsp.config("nixd", {
+  cmd = { "nixd", "--log=error" },
 })
 
 vim.lsp.config("hls", {
