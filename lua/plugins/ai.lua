@@ -69,43 +69,37 @@ return {
     },
     opts = {
       adapters = {
-        copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {
-            schema = {
-              model = {
-                default = "claude-sonnet-4.5",
+        http = {
+          copilot = function()
+            return require("codecompanion.adapters").extend("copilot", {
+              schema = {
+                model = {
+                  default = "claude-sonnet-4.5",
+                },
               },
-            },
-          })
-        end,
-        gemini_cli = function()
-          return require("codecompanion.adapters").extend("gemini_cli", {
-            commands = {
-              default = {
-                "gemini",
-                "--experimental-acp",
-                "--yolo",
-                "-m",
-                "gemini-3-pro-preview",
+            })
+          end,
+        },
+        acp = {
+          gemini_cli = function()
+            return require("codecompanion.adapters").extend("gemini_cli", {
+              commands = {
+                default = {
+                  "gemini",
+                  "--experimental-acp",
+                  "--yolo",
+                  "-m",
+                  "gemini-3-pro-preview",
+                },
               },
-            },
-            defaults = {
-              auth_method = "oauth-personal",
-            },
-          })
-        end,
-        opencode = function()
-          return require("codecompanion.adapters").extend("opencode", {
-            commands = {
-              default = {
-                "opencode",
-                "acp",
+              defaults = {
+                auth_method = "oauth-personal",
               },
-            },
-          })
-        end,
+            })
+          end,
+        },
       },
-      strategies = {
+      interactions = {
         chat = {
           adapter = "copilot",
         },
