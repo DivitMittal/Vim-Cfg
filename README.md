@@ -36,9 +36,9 @@
 
 This repository consists of:
 
-- A pure [lua](https://lua.org) [neovim](https://github.com/neovim/neovim) configuration over [NvChad](https://nvchad.com/) for [OS-nixCfg](https://github.com/DivitMittal/OS-nixCfg), deployed via [nix home-manager module, i.e., nix4nvchad](https://github.com/nix-community/nix4nvchad)
+- A pure [lua](https://lua.org) [neovim](https://github.com/neovim/neovim) configuration over [NvChad](https://nvchad.com/) for [infra-nixCfg](https://github.com/DivitMittal/infra-nixCfg), deployed via [nix home-manager module, i.e., nix4nvchad](https://github.com/nix-community/nix4nvchad)
 
-- A vimscript [vim](https://vim.org) configuration for [OS-nixCfg](https://github.com/DivitMittal/OS-nixCfg)
+- A vimscript [vim](https://vim.org) configuration for [infra-nixCfg](https://github.com/DivitMittal/infra-nixCfg)
 
 ## Project Structure
 
@@ -94,7 +94,7 @@ The repository is organized for reproducible Nix-based deployment with modular L
 
 ## Related Repositories
 
-- [DivitMittal/OS-nixCfg](https://github.com/DivitMittal/OS-nixCfg): Main Nix configurations repository
+- [DivitMittal/infra-nixCfg](https://github.com/DivitMittal/infra-nixCfg): Main Nix configurations repository
 ## For AI Agents
 
 Context files (`AGENTS.md`, `CLAUDE.md`) are generated — not committed. Run `apm compile` before exploring the repo to get directory-level guidance.

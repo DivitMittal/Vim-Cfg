@@ -1,5 +1,5 @@
 ---
-description: Vanilla Vim vimscript configuration deployed via OS-nixCfg
+description: Vanilla Vim vimscript configuration deployed via infra-nixCfg
 applyTo: "vim/**"
 ---
 
@@ -9,10 +9,10 @@ applyTo: "vim/**"
 
 ### Rules
 
-- **Self-contained**: do not `source` external files or rely on a runtime path beyond what OS-nixCfg provides.
-- **No plugin assumptions**: only assume plugins that OS-nixCfg explicitly installs for Vim. Do not reference Neovim-only APIs (`vim.fn`, `nvim_*`, Lua blocks).
+- **Self-contained**: do not `source` external files or rely on a runtime path beyond what infra-nixCfg provides.
+- **No plugin assumptions**: only assume plugins that infra-nixCfg explicitly installs for Vim. Do not reference Neovim-only APIs (`vim.fn`, `nvim_*`, Lua blocks).
 - **No Lua**: this file is pure vimscript. Keep it compatible with Vim 8+.
-- Deployed via the OS-nixCfg home-manager configuration — changes here take effect after a home-manager switch on the target system.
+- Deployed via the infra-nixCfg home-manager configuration — changes here take effect after a home-manager switch on the target system.
 
 ### When to edit
 

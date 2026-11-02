@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "OS-nixCfg": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1793280340,
-        "narHash": "sha256-cYHqWaBKCOYa2Cqm++zScjXmKCM94OzeTzVPQxOlpu4=",
-        "owner": "DivitMittal",
-        "repo": "OS-nixCfg",
-        "rev": "ec9ba5181971c64db6897fe52b03db1f86489139",
-        "type": "github"
-      },
-      "original": {
-        "owner": "DivitMittal",
-        "repo": "OS-nixCfg",
-        "type": "github"
-      }
-    },
     "actions-nix": {
       "inputs": {
         "flake-parts": [
@@ -132,6 +116,22 @@
         "type": "github"
       }
     },
+    "infra-nixCfg": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793280340,
+        "narHash": "sha256-cYHqWaBKCOYa2Cqm++zScjXmKCM94OzeTzVPQxOlpu4=",
+        "owner": "DivitMittal",
+        "repo": "infra-nixCfg",
+        "rev": "ec9ba5181971c64db6897fe52b03db1f86489139",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DivitMittal",
+        "repo": "infra-nixCfg",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1793466162,
@@ -181,12 +181,12 @@
     },
     "root": {
       "inputs": {
-        "OS-nixCfg": "OS-nixCfg",
         "actions-nix": "actions-nix",
         "devshell": "devshell",
         "flake-parts": "flake-parts",
         "git-hooks": "git-hooks",
         "import-tree": "import-tree",
+        "infra-nixCfg": "infra-nixCfg",
         "nixpkgs": "nixpkgs",
         "nixpkgs-2605": "nixpkgs-2605",
         "systems": "systems",

@@ -76,4 +76,4 @@ The Neovim configuration includes comprehensive LSP support for:
 
 This configuration is designed for deployment via:
 - **nix4nvchad**: Home-manager module for NixOS systems
-- **OS-nixCfg**: Parent NixOS configuration repository
+- **infra-nixCfg**: Parent NixOS configuration repository
