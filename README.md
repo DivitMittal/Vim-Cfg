@@ -40,6 +40,8 @@ This repository consists of:
 
 - A vimscript [vim](https://vim.org) configuration for [infra-nixCfg](https://github.com/DivitMittal/infra-nixCfg)
 
+The neovim configuration requires neovim 0.12+, a C compiler, and `tree-sitter-cli` 0.26.1+ on `PATH`; run `:TSInstallAll` to install parsers.
+
 ## Project Structure
 
 The repository is organized for reproducible Nix-based deployment with modular Lua configurations.

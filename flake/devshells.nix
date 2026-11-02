@@ -28,6 +28,8 @@ in {
             nixd
             alejandra
             stylua
+            ### nvim-treesitter (main) builds parsers with the CLI
+            tree-sitter
             ;
           ## AI context
           apm = customLib.mkUvxBin pkgs "apm" "--from apm-cli apm";

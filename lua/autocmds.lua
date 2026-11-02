@@ -102,6 +102,25 @@ autocmd("BufWinEnter", {
   end,
 })
 
+-- nvim-treesitter's main branch leaves indentation opt-in; only claim indentexpr when
+-- the language has an indents query, so other filetypes keep their native indent.
+-- scheduled because nvim enables filetype indent after init.lua, so $VIMRUNTIME/indent
+-- scripts run after this autocmd and would overwrite indentexpr
+autocmd("FileType", {
+  group = augroup("treesitter_indent", { clear = true }),
+  callback = function(args)
+    vim.schedule(function()
+      if not vim.api.nvim_buf_is_valid(args.buf) then
+        return
+      end
+      local lang = vim.treesitter.language.get_lang(args.match)
+      if lang and vim.treesitter.language.add(lang) and vim.treesitter.query.get(lang, "indents") then
+        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+    end)
+  end,
+})
+
 -- render-markdown.nvim relies on clean whitespace rendering; listchars with
 -- space/eol markers corrupt heading backgrounds and virtual text overlays.
 autocmd("FileType", {

@@ -76,11 +76,9 @@ return {
     "nvim-treesitter/nvim-treesitter",
     enabled = true,
     cond = not isVSCode,
+    -- explicit: existing clones keep their old origin/HEAD and would otherwise stay on master
+    branch = "main",
     opts = require "configs.treesitter_opts",
-    config = function(_, opts)
-      require("nvim-treesitter.install").compilers = { "clang" }
-      require("nvim-treesitter.configs").setup(opts)
-    end,
   },
 
   -- completion engine

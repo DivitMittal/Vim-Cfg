@@ -21,7 +21,7 @@ NvChad-based Neovim config. The entry point (`init.lua`) lives at the repo root 
 - `cmp_config.lua`: nvim-cmp autocompletion sources and keymaps.
 - `conform_opts.lua`: conform.nvim formatter mapping (filetype → formatter). Formatters must also be listed in `mason_pkgs.lua`.
 - `lint_opts.lua`: nvim-lint linter mapping (filetype → linter). Linters must also be listed in `mason_pkgs.lua`.
-- `treesitter_opts.lua`: nvim-treesitter `ensure_installed` and parser options.
+- `treesitter_opts.lua`: nvim-treesitter `ensure_installed`, consumed by NvChad's `:TSInstallAll`.
 - `lazy_config.lua`: lazy.nvim plugin manager settings (root dir, UI, performance).
 
 ### `plugins/init.lua`

@@ -4,6 +4,8 @@ return {
     "vim",
     "vimdoc",
     "lua",
+    "luadoc",
+    "printf",
 
     -- web-dev
     "html",
@@ -42,16 +44,5 @@ return {
     "ini",
     "toml",
     "yaml",
-  },
-
-  sync_install = false, -- synchronous install of ensure_installed
-  auto_install = false, -- auto install of ensure_installed
-  indent = {
-    enable = true,
-  },
-
-  highlight = {
-    enable = true,
-    use_languagetree = true,
   },
 }
