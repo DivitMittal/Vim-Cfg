@@ -17,6 +17,12 @@ return {
   -- ----------------------------------------------------------- --
   --                   Overrides
   -- ----------------------------------------------------------- --
+  -- explicit: NvChad's spec sets no branch, so existing clones stay on the stale v2.5
+  {
+    "nvchad/base46",
+    branch = "v3.0",
+  },
+
   -- file explorer/navigation
   {
     "nvim-tree/nvim-tree.lua",
