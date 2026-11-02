@@ -57,7 +57,7 @@ return {
     end,
     keys = {
       {
-        mode = { "n", "v" },
+        mode = { "n", "x" },
         "<leader>fm",
         function()
           require("conform").format { async = true }
