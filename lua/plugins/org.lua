@@ -20,9 +20,51 @@ return {
       org_todo_keywords = { "TODO", "PROJ", "LOOP", "STRT", "WAIT", "HOLD", "IDEA", "|", "DONE", "KILL" },
       org_startup_indented = true,
       org_hide_emphasis_markers = true,
+      -- Same keys, targets and bodies as `org-capture-templates` in emacs-Cfg, so either editor
+      -- captures into the same place. %U (date + time) rather than %u: when a thought was
+      -- recorded matters as much as the thought.
       org_capture_templates = {
-        t = { description = "Task", template = "* TODO %?\n  %u" },
-        n = { description = "Note", template = "* %?\n  %u" },
+        t = {
+          description = "Task",
+          template = "* TODO %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:",
+          target = orgDir .. "/inbox.org",
+        },
+        n = {
+          description = "Note",
+          template = "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:",
+          target = orgDir .. "/inbox.org",
+        },
+        -- Interstitial log: one line whenever focus changes; this is the "what did I actually do"
+        j = {
+          description = "Journal",
+          template = "* %U %?",
+          target = orgDir .. "/journal.org",
+          datetree = { tree_type = "day" },
+        },
+        r = {
+          description = "Reply to someone",
+          template = "* TODO Reply to %^{Who}%?\n  DEADLINE: %^{Reply by}t\n  :PROPERTIES:\n  :CREATED: %U\n  :END:",
+          target = orgDir .. "/people.org",
+        },
+        -- Doom clocks in automatically (:clock-in); nvim-orgmode has no equivalent, so clock in
+        -- by hand with <leader>Oxi after finishing the capture
+        c = {
+          description = "Clocked work",
+          template = "* STRT %^{Working on}\n  :PROPERTIES:\n  :CREATED: %U\n  :END:\n  %?",
+          target = orgDir .. "/journal.org",
+          datetree = { tree_type = "day" },
+        },
+      },
+      org_agenda_custom_commands = {
+        -- Morning view: today's schedule, what's in progress, and who/what is blocking
+        d = {
+          description = "Daily",
+          types = {
+            { type = "agenda", org_agenda_span = "day", org_agenda_overriding_header = "Today" },
+            { type = "tags_todo", match = "/STRT", org_agenda_overriding_header = "In progress" },
+            { type = "tags_todo", match = "/WAIT", org_agenda_overriding_header = "Waiting on" },
+          },
+        },
       },
       -- The default <leader>o prefix would delay Lspsaga's <leader>o outline by timeoutlen
       mappings = { prefix = "<leader>O" },
