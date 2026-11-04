@@ -7,6 +7,7 @@ return {
   { import = "plugins.general" }, -- General enhancements & LSP UI
   { import = "plugins.misc" }, -- Miscellaneous enhancements
   { import = "plugins.notes" }, -- Note-taking & markdown
+  { import = "plugins.org" }, -- Org-mode
   { import = "plugins.repl" }, -- REPL integration
   { import = "plugins.ai" }, -- AI-powered assistance
 }
