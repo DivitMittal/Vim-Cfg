@@ -2,7 +2,7 @@ name: vim-cfg
 version: 1.0.0
 description: Dual Vim/Neovim configuration (NvChad-based Lua + vimscript) deployed via Nix flakes
 author: DivitMittal
-license: MIT
+license: LicenseRef-HONCL-1.0
 target:
   - claude
   - codex
