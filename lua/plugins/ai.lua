@@ -1,6 +1,35 @@
 -- AI-powered coding assistance plugins
 local isVSCode = vim.g.vscode
 
+-- Prose/journaling filetypes where Copilot stays off unless opted in per buffer.
+-- "" covers unnamed scratch buffers, which have no filetype.
+local notes_filetypes = { "", "markdown", "text", "org", "norg", "asciidoc", "vimwiki", "mail" }
+
+-- Evaluated by copilot.lua each time it decides whether to attach to a buffer
+local function notes_opted_in()
+  return vim.b.copilot_notes_enabled == true
+end
+
+local copilot_filetypes = { ["."] = false }
+for _, ft in ipairs(notes_filetypes) do
+  copilot_filetypes[ft] = notes_opted_in
+end
+
+local function toggle_copilot_notes()
+  local client = require "copilot.client"
+  if not vim.tbl_contains(notes_filetypes, vim.bo.filetype) then
+    vim.notify("Copilot: not a notes buffer (use :Copilot toggle instead)", vim.log.levels.WARN)
+    return
+  end
+  vim.b.copilot_notes_enabled = not notes_opted_in()
+  if vim.b.copilot_notes_enabled then
+    client.buf_attach(true)
+  else
+    client.buf_detach_if_attached()
+  end
+  vim.notify("Copilot for this notes buffer: " .. (vim.b.copilot_notes_enabled and "on" or "off"))
+end
+
 return {
   -- Copilot Autocomplete
   {
@@ -11,11 +40,7 @@ return {
     cmd = "Copilot",
     event = "InsertEnter",
     opts = {
-      filetypes = {
-        markdown = false,
-        text = false,
-        ["."] = false,
-      },
+      filetypes = copilot_filetypes,
       suggestion = {
         enabled = true,
         auto_trigger = true,
@@ -50,6 +75,11 @@ return {
           require("copilot.panel").toggle()
         end,
         desc = "toggle copilot panel",
+      },
+      {
+        "<leader>cn",
+        toggle_copilot_notes,
+        desc = "toggle copilot in notes buffer",
       },
     },
   },
