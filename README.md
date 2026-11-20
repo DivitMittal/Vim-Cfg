@@ -75,6 +75,7 @@ The repository is organized for reproducible Nix-based deployment with modular L
 │   │   ├── init.lua          # Plugin loader
 │   │   ├── misc.lua          # Miscellaneous plugins
 │   │   ├── notes.lua         # Note-taking plugins
+│   │   ├── org.lua           # Org-mode, shared with Doom Emacs
 │   │   ├── nvchad.lua        # NvChad-specific plugins
 │   │   └── repl.lua          # REPL integrations
 │   ├── autocmds.lua          # Autocommands
